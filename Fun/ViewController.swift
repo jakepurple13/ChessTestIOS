@@ -77,14 +77,23 @@ class ViewController: UIViewController {
             self.track(mySubstring)
             let welcome = try? JSONDecoder().decode(Welcome.self, from: mySubstring.data(using: .utf8)!)
             self.track(welcome?.normal.storage[0].link ?? "Nope")
-            /*
+            
             let link = welcome?.normal.storage[0].link
             let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
             let documentsDirectory = paths[0]
-            SDDownloadManager.shared.dowloadFile(withRequest: URLRequest.init(url: URL.init(string: link!)!), inDirectory: documentsDirectory, withName: "test1.mp4", onProgress: SDDownloadManager.DownloadProgressBlock {
-                
-                }, onCompletion: <#T##SDDownloadManager.DownloadCompletionBlock##SDDownloadManager.DownloadCompletionBlock##(Error?, URL?) -> Void#>)
-            */
+            SDDownloadManager.shared.dowloadFile(withRequest: URLRequest.init(url: URL.init(string: link!)!), inDirectory: documentsDirectory, withName: "test1.mp4", onProgress: { [weak self] (progress) in
+                let percentage = String(format: "%.1f %", (progress * 100))
+                self?.track(percentage)
+            }) { [weak self] (error, url) in
+                if let error = error {
+                    print("Error is \(error as NSError)")
+                } else {
+                    if let url = url {
+                        print("Downloaded file's url is \(url.path)")
+                    }
+                }
+            }
+ 
         }
         
     }
