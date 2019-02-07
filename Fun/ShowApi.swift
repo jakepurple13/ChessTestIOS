@@ -9,6 +9,13 @@
 import Foundation
 import SwiftSoup
 import SDDownloadManager
+import MZDownloadManager
+import Digger
+import Photos
+import UIKit
+import Alamofire
+import JGProgressHUD
+import VeloxDownloader
 extension String {
     func regexed(pat: String) -> [String] {
         if let regex = try? NSRegularExpression(pattern: pat, options: .caseInsensitive) {
@@ -79,6 +86,26 @@ public enum Source {
             return false
         }
     }
+    
+    var rawValue: String {
+        switch self {
+        case .RECENT_ANIME:
+            return "Recent Anime"
+        case .RECENT_CARTOON:
+            return "Recent Cartoon"
+        case .ANIME:
+            return "Anime"
+        case .CARTOON:
+            return "Cartoon"
+        case .DUBBED:
+            return "Dubbed"
+        case .ANIME_MOVIES:
+            return "Anime Movies"
+        case .CARTOON_MOVIES:
+            return "Cartoon Movies"
+        }
+    }
+    
 }
 
 public struct NameAndLink {
@@ -100,12 +127,16 @@ public class ShowApi: NSObject {
     }
     
     private func getRecentVideoList(url: String) -> [NameAndLink] {
+        track("Here")
         //get recent list
         var list = [NameAndLink]()
         do {
             let html: String = getUrl(url: url) as String;
             let doc: Document = try SwiftSoup.parse(html)
-            let link: Elements = try doc.select("div.left_col").select("table#updates").select("a[href^=http]")
+            var link: Elements = try doc.select("div.left_col").select("table#updates").select("a[href^=http]")
+            if(link.size()==0) {
+                link = try doc.select("div.s_left_col").select("table#updates").select("a[href^=http]")
+            }
             for elem in link.array() {
                 let linked = try elem.attr("abs:href")
                 let named = try elem.text()
@@ -123,7 +154,8 @@ public class ShowApi: NSObject {
     }
     
     private func getVideoList(url: String) -> [NameAndLink] {
-        //get recent list
+        track("Here")
+        //get list
         var list = [NameAndLink]()
         do {
             
@@ -154,9 +186,11 @@ public class EpisodeApi: NSObject {
     var imageUrl: String = ""
     var des: String = ""
     var episodeList: [NameAndLink] = [NameAndLink]()
+    var vc: UIViewController? = nil
     
-    init(url: String) {
+    init(url: String, vc: UIViewController) {
         super.init()
+        self.vc = vc
         do {
             let html: String = getUrl(url: url) as String;
             let doc: Document = try SwiftSoup.parse(html)
@@ -242,22 +276,92 @@ public class EpisodeApi: NSObject {
     
     private func downloadVideo(welcome: Welcome) {
         let link = welcome.normal.storage[0].link
+        
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentsDirectory = paths[0]
+        
+        let hud = JGProgressHUD(style: .dark)
+        hud.detailTextLabel.text = "0% Complete"
+        hud.textLabel.text = "Downloading"
+        hud.indicatorView = JGProgressHUDPieIndicatorView()
+        hud.show(in: self.vc!.view)
+        
         let key = SDDownloadManager.shared.dowloadFile(withRequest: URLRequest.init(url: URL.init(string: link)!), inDirectory: documentsDirectory, withName: welcome.normal.storage[0].filename, onProgress: {
             (progress) in
             let percentage = String(format: "%.1f %", (progress * 100))
             track(percentage)
+            //self.incrementHUD(hud, progress: Int(progress*100))
+            hud.progress = Float(progress)
+            hud.detailTextLabel.text = "\(percentage)% Complete"
         }, onCompletion: { (error, url) in
+            hud.dismiss(afterDelay: 3.0)
             if let error = error {
                 print("Error is \(error as NSError)")
             } else {
                 if let url = url {
                     print("Downloaded file's url is \(url.path)")
+                    self.saveVideoTo(URL.init(string: url.path)!)
                 }
             }
         }
         )
+        
         track(key ?? "No Keyia")
+ 
+        /*
+        let url = URL(string: link)
+        
+        let progressClosure : (CGFloat,VeloxDownloadInstance) -> (Void)
+        let remainingTimeClosure : (CGFloat) -> Void
+        let completionClosure : (Bool) -> Void
+        
+        
+        progressClosure = {(progress,downloadInstace) in
+            print("Progress of File : \(downloadInstace.filename) is \(Float(progress))")
+        }
+        
+        remainingTimeClosure = {(timeRemaning) in
+            print("Remaining Time is : \(timeRemaning)")
+        }
+        
+        completionClosure = {(status) in
+            print("is Download completed : \(status)")
+            self.saveVideoTo(URL.init(string: "\(documentsDirectory)/\(url!.lastPathComponent)")!)
+        }
+        
+        
+        VeloxDownloadManager.sharedInstance.downloadFile(
+            withURL: url!,
+            name: url!.lastPathComponent,
+            directoryName: documentsDirectory,
+            friendlyName: nil,
+            progressClosure: progressClosure,
+            remainigtTimeClosure: remainingTimeClosure,
+            completionClosure: completionClosure,
+            backgroundingMode: true)
+        */
     }
+    
+    func saveVideoTo(_ videoUrl: URL?) {
+        
+        if videoUrl != nil {
+            PHPhotoLibrary.shared().performChanges({ () -> Void in
+                
+                let createAssetRequest: PHAssetChangeRequest = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoUrl!)!
+                createAssetRequest.placeholderForCreatedAsset
+                
+            }) { (success, error) -> Void in
+                if success {
+                    //saved successfully
+                    track("Sucess \(videoUrl!.absoluteString)")
+                } else {
+                    //error occured
+                    track(error!.localizedDescription)
+                }
+            }
+            
+        }
+        
+    }
+    
 }

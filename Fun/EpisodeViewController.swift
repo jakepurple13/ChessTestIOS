@@ -8,18 +8,20 @@
 
 import UIKit
 import Kingfisher
-
+import JGProgressHUD
 class EpisodeTableCell: UITableViewCell {
     @IBOutlet weak var episodeNumber: UILabel!
     @IBOutlet weak var downloadButton: UIButton!
 }
 
 class EpisodeViewController: UIViewController, UITableViewDataSource {
-
-    @IBOutlet weak var nameOfEpisode: UILabel!
+    
     @IBOutlet weak var coverImage: UIImageView!
     @IBOutlet weak var descriptionOfShow: UILabel!
     @IBOutlet weak var episodeList: UITableView!
+    
+    @IBOutlet weak var titleItem: UINavigationItem!
+    
     
     var url: String = ""
     var list = [NameAndLink]()
@@ -32,23 +34,30 @@ class EpisodeViewController: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
 
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Loading..."
+        hud.show(in: self.view)
+        
         // Do any additional setup after loading the view.
-        self.nameOfEpisode.text = "Loading"
+        self.titleItem.title = "Loading"
         
         DispatchQueue.main.async {
             DispatchQueue.main.async {
-                self.shows = EpisodeApi(url: self.url)
+                self.shows = EpisodeApi(url: self.url, vc: self)
                 track("Name: \(self.shows!.name)")
                 track("ImageURL: \(self.shows!.imageUrl)")
                 track("Des: \(self.shows!.des)")
                 track("Episode Count: \(self.shows!.episodeList.count)")
-                self.nameOfEpisode.text = self.shows!.name
+                    self.titleItem.title = self.shows!.name
                 self.descriptionOfShow.text = self.shows!.des
                 self.coverImage.kf.setImage(with: URL(string: self.shows!.imageUrl))
                 self.list = self.shows!.episodeList
                 self.episodeList.dataSource = self
                 self.episodeList.reloadData()
+                hud.dismiss(animated: true)
             }
         }
         

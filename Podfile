@@ -10,8 +10,17 @@ target 'Fun' do
   # Pods for Fun
   pod 'SwiftSoup'
   pod 'SDDownloadManager'
+  pod "MZDownloadManager"
+  pod 'VeloxDownloader', '~> 1.6'
+  #pod 'TransporterSwift', '0.1.1'
+  pod 'Digger'
+  pod "Player", "~> 0.12.0"
+  pod "ASPVideoPlayer"
+  pod 'VersaPlayer'
   pod 'SimpleCheckbox'
   pod 'Kingfisher', '~> 5.0'
+  pod 'Alamofire', '~> 5.0.0.beta.1'
+  pod 'JGProgressHUD'
   
   target 'FunTests' do
     inherit! :search_paths
