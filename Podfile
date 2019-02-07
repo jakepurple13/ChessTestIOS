@@ -21,6 +21,9 @@ target 'Fun' do
   pod 'Kingfisher', '~> 5.0'
   pod 'Alamofire', '~> 5.0.0.beta.1'
   pod 'JGProgressHUD'
+  pod "SwipeTransition"
+  pod "SwipeTransitionAutoSwipeBack"      # if needed
+  pod "SwipeTransitionAutoSwipeToDismiss" # if needed
   
   target 'FunTests' do
     inherit! :search_paths

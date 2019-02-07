@@ -153,6 +153,9 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/SDDownloadManager/SDDownloadManager.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SimpleCheckbox/SimpleCheckbox.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwipeTransition/SwipeTransition.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwipeTransitionAutoSwipeBack/SwipeTransitionAutoSwipeBack.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwipeTransitionAutoSwipeToDismiss/SwipeTransitionAutoSwipeToDismiss.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/VeloxDownloader/VeloxDownloader.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/VersaPlayer/VersaPlayer.framework"
 fi
@@ -167,6 +170,9 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/SDDownloadManager/SDDownloadManager.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SimpleCheckbox/SimpleCheckbox.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwipeTransition/SwipeTransition.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwipeTransitionAutoSwipeBack/SwipeTransitionAutoSwipeBack.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwipeTransitionAutoSwipeToDismiss/SwipeTransitionAutoSwipeToDismiss.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/VeloxDownloader/VeloxDownloader.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/VersaPlayer/VersaPlayer.framework"
 fi

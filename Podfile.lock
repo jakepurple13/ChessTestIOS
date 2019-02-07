@@ -1,28 +1,74 @@
 PODS:
+  - Alamofire (5.0.0.beta.1)
+  - ASPVideoPlayer (5.0.2)
+  - Digger (0.0.5)
+  - JGProgressHUD (2.0.3)
   - Kingfisher (5.0.1)
+  - MZDownloadManager (3.5)
+  - Player (0.12.1)
   - SDDownloadManager (1.0.3)
   - SimpleCheckbox (1.5.0)
   - SwiftSoup (1.7.4)
+  - SwipeTransition (0.3.3)
+  - SwipeTransitionAutoSwipeBack (0.3.3):
+    - SwipeTransition (~> 0.3.3)
+  - SwipeTransitionAutoSwipeToDismiss (0.3.3):
+    - SwipeTransition (~> 0.3.3)
+  - VeloxDownloader (1.6)
+  - VersaPlayer (2.1.4)
 
 DEPENDENCIES:
+  - Alamofire (~> 5.0.0.beta.1)
+  - ASPVideoPlayer
+  - Digger
+  - JGProgressHUD
   - Kingfisher (~> 5.0)
+  - MZDownloadManager
+  - Player (~> 0.12.0)
   - SDDownloadManager
   - SimpleCheckbox
   - SwiftSoup
+  - SwipeTransition
+  - SwipeTransitionAutoSwipeBack
+  - SwipeTransitionAutoSwipeToDismiss
+  - VeloxDownloader (~> 1.6)
+  - VersaPlayer
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - ASPVideoPlayer
+    - Digger
+    - JGProgressHUD
     - Kingfisher
+    - MZDownloadManager
+    - Player
     - SDDownloadManager
     - SimpleCheckbox
     - SwiftSoup
+    - SwipeTransition
+    - SwipeTransitionAutoSwipeBack
+    - SwipeTransitionAutoSwipeToDismiss
+    - VeloxDownloader
+    - VersaPlayer
 
 SPEC CHECKSUMS:
+  Alamofire: 2ef6d6c984c5d21c366e9b41a9ae7dfee2b67a44
+  ASPVideoPlayer: f8feb3c47adfcb89a281960030165a2af69b3cbf
+  Digger: c474bde76a91e0a36f12101c5dfe7e86774b15d3
+  JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   Kingfisher: 4f771421b9208185217550528a06fd48756cb7c2
+  MZDownloadManager: ba9e3289d28516b1a610228012371fc41ad2f149
+  Player: ae8070a33c9360f5c93c247c00236b9489f62fca
   SDDownloadManager: ccfe81413ed647d490c993c80aa137b187fc04ab
   SimpleCheckbox: 1e59697852ef3caa56a0ed1b40be0f034763b9b9
   SwiftSoup: 92f5b348c131aed8af04f4326db1579ab19fa08c
+  SwipeTransition: d6f54986ec7b2e3b659b65ad277e831fe1438eb5
+  SwipeTransitionAutoSwipeBack: e2c75db2bec77b3100d22a560f1467c25a4062fd
+  SwipeTransitionAutoSwipeToDismiss: 94b97cde4bdc672c47e700964a90776bf19d44dd
+  VeloxDownloader: af352622cdc059830d94ca3ea013aaa3380db14d
+  VersaPlayer: 12d948a71f8479673b2f3853f84600d4a400f28f
 
-PODFILE CHECKSUM: f105624485ecd166ff67955ee18521446d9d4a07
+PODFILE CHECKSUM: 36387399c9c7269ed9b091835a0439bf22d8b392
 
 COCOAPODS: 1.5.2

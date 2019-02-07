@@ -9,15 +9,26 @@
 import UIKit
 import SimpleCheckbox
 import JGProgressHUD
+import SwipeTransition
+
+extension ShowTableViewController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        // TODO
+    }
+}
+
 class ShowTableViewCell: UITableViewCell {
     @IBOutlet weak var nameToShow: UILabel!
     @IBOutlet weak var checkFavorite: Checkbox!
 }
 
-class ShowTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ShowTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
     
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var titleBar: UINavigationItem!
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     @IBAction func goBack(_ segue: UIStoryboardSegue) {
         
@@ -28,6 +39,7 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
     var url = ""
     var source: Source? = nil
     var shows: ShowApi? = nil
+    var filteredShows = [NameAndLink]()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -45,6 +57,13 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         track("hello")
         
+        self.searchBar.showsCancelButton = false
+        self.searchBar.delegate = self
+        
+        definesPresentationContext = true
+        self.navigationController?.swipeBack?.isEnabled = false
+        self.swipeToDismiss?.isEnabled = true
+        
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Loading..."
         hud.show(in: self.view)
@@ -55,7 +74,15 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
             DispatchQueue.main.async {
                 self.shows = ShowApi(source: self.source!)
                 self.list = (self.shows?.showList)!
+                //self.filteredShows = self.list
                 self.titleBar.title = self.source!.rawValue
+                if(!(self.source?.recent)!) {
+                    self.list.sort { $0.name.localizedCaseInsensitiveCompare($1.name) == ComparisonResult.orderedAscending }
+                    track("here")
+                    //self.filteredShows = self.list.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == ComparisonResult.orderedAscending }
+                    //self.filteredShows.reverse()
+                }
+                self.filteredShows = self.list
                 self.tableView.dataSource = self
                 self.tableView.delegate = self
                 self.tableView.reloadData()
@@ -79,16 +106,44 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    
+    // This method updates filteredData based on the text in the Search Box
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // When there is no text, filteredData is the same as the original data
+        // When user has entered text into the search box
+        // Use the filter method to iterate over all items in the data array
+        // For each item, return true if the item should be included and false if the
+        // item should NOT be included
+        searchBar.showsCancelButton = false
+        if let searchText = searchBar.text {
+            filteredShows = searchText.isEmpty ? list : list.filter({(dataString: NameAndLink) -> Bool in
+                return dataString.name.range(of: searchText, options: .caseInsensitive) != nil
+            })
+            tableView.reloadData()
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        // Stop doing the search stuff
+        // and clear the text in the search bar
+        searchBar.text = ""
+        // Hide the cancel button
+        searchBar.showsCancelButton = false
+        // You could also change the position, frame etc of the searchBar
+        self.filteredShows = self.list
+        self.tableView.reloadData()
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         //track("here")
-        return list.count
+        //return list.count
+        return filteredShows.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -103,7 +158,7 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
 
         
         // Fetches the appropriate meal for the data source layout.
-        let show = list[indexPath.row]
+        let show = filteredShows[indexPath.row]
         
         cell.textLabel?.text = show.name
         cell.accessoryType = indexPath.row%2==0 ? UITableViewCell.AccessoryType.checkmark : UITableViewCell.AccessoryType.none
@@ -122,7 +177,7 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
         
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "episodeactivity") as! EpisodeViewController
         
-        nextViewController.url = list[indexPath.row].url
+        nextViewController.url = filteredShows[indexPath.row].url
         
         self.present(nextViewController, animated:true, completion:nil)
     }

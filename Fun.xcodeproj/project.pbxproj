@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		39F1F3EA08D820691E932C75 /* Pods_Fun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDD21CFA9850D472F8BAC84 /* Pods_Fun.framework */; };
+		50198ADE220CAB4600A09624 /* SwipeTransition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50198ADD220CAB4600A09624 /* SwipeTransition.framework */; };
+		50198AE0220CAB4600A09624 /* SwipeTransitionAutoSwipeBack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50198ADF220CAB4600A09624 /* SwipeTransitionAutoSwipeBack.framework */; };
+		50198AE2220CAB4600A09624 /* SwipeTransitionAutoSwipeToDismiss.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50198AE1220CAB4600A09624 /* SwipeTransitionAutoSwipeToDismiss.framework */; };
 		5027281821CE7B63009CE1D0 /* ShowApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5027281721CE7B63009CE1D0 /* ShowApi.swift */; };
 		5027281D21CE8ACB009CE1D0 /* ShowTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5027281B21CE8ACB009CE1D0 /* ShowTableViewController.swift */; };
 		50A9E19621CAA1E8009EC154 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9E19521CAA1E8009EC154 /* AppDelegate.swift */; };
@@ -46,6 +49,9 @@
 		38A8290338E217D22EAAFDF1 /* Pods-Fun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fun.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fun/Pods-Fun.release.xcconfig"; sourceTree = "<group>"; };
 		4589441F5C511D2BCE5C2ED8 /* Pods-FunUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FunUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FunUITests/Pods-FunUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4EDD21CFA9850D472F8BAC84 /* Pods_Fun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50198ADD220CAB4600A09624 /* SwipeTransition.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwipeTransition.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50198ADF220CAB4600A09624 /* SwipeTransitionAutoSwipeBack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwipeTransitionAutoSwipeBack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50198AE1220CAB4600A09624 /* SwipeTransitionAutoSwipeToDismiss.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwipeTransitionAutoSwipeToDismiss.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5027281721CE7B63009CE1D0 /* ShowApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowApi.swift; sourceTree = "<group>"; };
 		5027281B21CE8ACB009CE1D0 /* ShowTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTableViewController.swift; sourceTree = "<group>"; };
 		50A9E19221CAA1E8009EC154 /* Fun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fun.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +80,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50198ADE220CAB4600A09624 /* SwipeTransition.framework in Frameworks */,
+				50198AE0220CAB4600A09624 /* SwipeTransitionAutoSwipeBack.framework in Frameworks */,
+				50198AE2220CAB4600A09624 /* SwipeTransitionAutoSwipeToDismiss.framework in Frameworks */,
 				39F1F3EA08D820691E932C75 /* Pods_Fun.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,6 +109,9 @@
 		3A6DD3FE6F3489FC704A5B12 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				50198ADD220CAB4600A09624 /* SwipeTransition.framework */,
+				50198ADF220CAB4600A09624 /* SwipeTransitionAutoSwipeBack.framework */,
+				50198AE1220CAB4600A09624 /* SwipeTransitionAutoSwipeToDismiss.framework */,
 				4EDD21CFA9850D472F8BAC84 /* Pods_Fun.framework */,
 				16C22AD39635C818AEE0EFF7 /* Pods_FunTests.framework */,
 				1D4123CE997589EABAB40480 /* Pods_FunUITests.framework */,
@@ -325,6 +337,9 @@
 				"${BUILT_PRODUCTS_DIR}/SDDownloadManager/SDDownloadManager.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleCheckbox/SimpleCheckbox.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
+				"${BUILT_PRODUCTS_DIR}/SwipeTransition/SwipeTransition.framework",
+				"${BUILT_PRODUCTS_DIR}/SwipeTransitionAutoSwipeBack/SwipeTransitionAutoSwipeBack.framework",
+				"${BUILT_PRODUCTS_DIR}/SwipeTransitionAutoSwipeToDismiss/SwipeTransitionAutoSwipeToDismiss.framework",
 				"${BUILT_PRODUCTS_DIR}/VeloxDownloader/VeloxDownloader.framework",
 				"${BUILT_PRODUCTS_DIR}/VersaPlayer/VersaPlayer.framework",
 			);
@@ -340,6 +355,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDDownloadManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleCheckbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeTransition.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeTransitionAutoSwipeBack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeTransitionAutoSwipeToDismiss.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VeloxDownloader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VersaPlayer.framework",
 			);

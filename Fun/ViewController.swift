@@ -106,7 +106,7 @@ class ViewController: UIViewController {
                 self.present(nextViewController, animated:true, completion:nil)
             }
             */
-            self.button.titleLabel?.text = "Done"
+            //self.button.titleLabel?.text = "Done"
             
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             
