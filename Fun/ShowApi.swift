@@ -16,6 +16,8 @@ import UIKit
 import Alamofire
 import JGProgressHUD
 import VeloxDownloader
+import UserNotifications
+import AudioToolbox
 extension String {
     func regexed(pat: String) -> [String] {
         if let regex = try? NSRegularExpression(pattern: pat, options: .caseInsensitive) {
@@ -180,15 +182,15 @@ public class ShowApi: NSObject {
     }
 }
 
-public class EpisodeApi: NSObject {
+public class EpisodeApi: NSObject, MZDownloadManagerDelegate, UNUserNotificationCenterDelegate {
     
     var name: String = ""
     var imageUrl: String = ""
     var des: String = ""
     var episodeList: [NameAndLink] = [NameAndLink]()
-    var vc: UIViewController? = nil
+    var vc: EpisodeViewController? = nil
     
-    init(url: String, vc: UIViewController) {
+    init(url: String, vc: EpisodeViewController) {
         super.init()
         self.vc = vc
         do {
@@ -274,11 +276,39 @@ public class EpisodeApi: NSObject {
         downloadVideo(welcome: welcome!)
     }
     
+    lazy var downloadManager: MZDownloadManager = {
+        [unowned self] in
+        let sessionIdentifer: String = "com.fun.fun.Fun.Background"
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        var completion = appDelegate.backgroundSessionCompletionHandler
+        
+        let downloadmanager = MZDownloadManager(session: sessionIdentifer, delegate: self, completion: {
+            
+        })
+        return downloadmanager
+        }()
+    
+    public func downloadRequestFinished(_ downloadModel: MZDownloadModel, index: Int) {
+        self.saveVideoTo(URL.init(string: downloadModel.destinationPath)!)
+    }
+    
+    public func downloadRequestDidUpdateProgress(_ downloadModel: MZDownloadModel, index: Int) {
+        track("\(downloadModel.progress)%")
+    }
+    
+    public func downloadRequestDidPopulatedInterruptedTasks(_ downloadModel: [MZDownloadModel]) {
+        
+    }
+    
     private func downloadVideo(welcome: Welcome) {
         let link = welcome.normal.storage[0].link
         
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentsDirectory = paths[0]
+        //self.vc!.downloadTask = self.vc!.defaultSession.downloadTask(with: URL.init(string: link)!)
+        //self.vc!.downloadTask.resume()
+        //downloadManager.addDownloadTask(welcome.normal.storage[0].filename, fileURL: link, destinationPath: "\(documentsDirectory)/\(welcome.normal.storage[0].filename)")
         
         let hud = JGProgressHUD(style: .dark)
         hud.detailTextLabel.text = "0% Complete"
@@ -288,26 +318,47 @@ public class EpisodeApi: NSObject {
         
         let key = SDDownloadManager.shared.dowloadFile(withRequest: URLRequest.init(url: URL.init(string: link)!), inDirectory: documentsDirectory, withName: welcome.normal.storage[0].filename, onProgress: {
             (progress) in
-            let percentage = String(format: "%.1f %", (progress * 100))
-            track(percentage)
+            let percentage = String(format: "%.2f %", (progress * 100))
+            track("\(percentage) and \(progress)")
             //self.incrementHUD(hud, progress: Int(progress*100))
             hud.progress = Float(progress)
             hud.detailTextLabel.text = "\(percentage)% Complete"
         }, onCompletion: { (error, url) in
-            hud.dismiss(afterDelay: 3.0)
+            hud.textLabel.text = "Finished Downloading!"
+            hud.dismiss(afterDelay: 2, animated: true)
             if let error = error {
                 print("Error is \(error as NSError)")
             } else {
                 if let url = url {
+                    // Swift
+                    let center = UNUserNotificationCenter.current()
+                    let content = UNMutableNotificationContent()
+                    content.title = "Finished Downloading!"
+                    content.body = "\(welcome.normal.storage[0].filename)"
+                    content.sound = UNNotificationSound.default
+                    content.categoryIdentifier = "UYLReminderCategory"
+                    center.delegate = self
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1,
+                                                                    repeats: false)
+                    let request = UNNotificationRequest(identifier: "fun.noti",
+                                                        content: content, trigger: trigger)
+                    center.add(request, withCompletionHandler: { (error) in
+                        if let error = error {
+                            // Something went wrong
+                            print(error.localizedDescription)
+                        }
+                    })
                     print("Downloaded file's url is \(url.path)")
                     self.saveVideoTo(URL.init(string: url.path)!)
+                    AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+                    AudioServicesPlaySystemSound(SystemSoundID.init(bitPattern: 1016))
                 }
             }
         }
         )
         
         track(key ?? "No Keyia")
- 
+        
         /*
         let url = URL(string: link)
         
@@ -340,6 +391,12 @@ public class EpisodeApi: NSObject {
             completionClosure: completionClosure,
             backgroundingMode: true)
         */
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) ->    Void) {
+        completionHandler([.alert, .badge, .sound])
     }
     
     func saveVideoTo(_ videoUrl: URL?) {

@@ -14,7 +14,7 @@ class EpisodeTableCell: UITableViewCell {
     @IBOutlet weak var downloadButton: UIButton!
 }
 
-class EpisodeViewController: UIViewController, UITableViewDataSource {
+class EpisodeViewController: UIViewController, UITableViewDataSource, URLSessionDownloadDelegate {
     
     @IBOutlet weak var coverImage: UIImageView!
     @IBOutlet weak var descriptionOfShow: UILabel!
@@ -22,10 +22,13 @@ class EpisodeViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var titleItem: UINavigationItem!
     
+    var defaultSession: URLSession!
+    var downloadTask: URLSessionDownloadTask!
     
     var url: String = ""
     var list = [NameAndLink]()
     var shows: EpisodeApi? = nil
+    //let hud = JGProgressHUD(style: .dark)
     
     required init?(coder aDecoder: NSCoder) {
         //fatalError("init(coder:) has not been implemented")
@@ -36,7 +39,10 @@ class EpisodeViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-
+        
+        let backgroundSessionConfiguration = URLSessionConfiguration.background(withIdentifier: "backgroundSession")
+        defaultSession = Foundation.URLSession(configuration: backgroundSessionConfiguration, delegate: self, delegateQueue: OperationQueue.main)
+        
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Loading..."
         hud.show(in: self.view)
@@ -94,8 +100,61 @@ class EpisodeViewController: UIViewController, UITableViewDataSource {
     @objc func downloadVideo(_ sender: UIButton) {
         DispatchQueue.main.async {
             DispatchQueue.main.async {
+                /*
+                self.hud.detailTextLabel.text = "0% Complete"
+                self.hud.textLabel.text = "Downloading"
+                self.hud.indicatorView = JGProgressHUDPieIndicatorView()
+                self.hud.show(in: self.view)
+                */
                 self.shows!.getVideo(url: self.list[sender.tag].url)
             }
+        }
+    }
+    
+    // MARK:- URLSessionDownloadDelegate
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        //self.hud.dismiss(animated: true)
+        print(downloadTask)
+        print("File download succesfully")
+        /*
+        let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        let documentDirectoryPath:String = path[0]
+        let fileManager = FileManager()
+        let destinationURLForFile = URL(fileURLWithPath: documentDirectoryPath.appendingFormat("/file.pdf"))
+        
+        if fileManager.fileExists(atPath: destinationURLForFile.path){
+            //showFileWithPath(path: destinationURLForFile.path)
+            print(destinationURLForFile.path)
+        } else {
+            do {
+                try fileManager.moveItem(at: location, to: destinationURLForFile)
+                // show file
+                //showFileWithPath(path: destinationURLForFile.path)
+            }catch{
+                print("An error occurred while moving file to destination url")
+            }
+        }
+        */
+        self.shows!.saveVideoTo(URL.init(string: location.path)!)
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        //progress.setProgress(Float(totalBytesWritten)/Float(totalBytesExpectedToWrite), animated: true)
+        let percentage = String(format: "%.2f %", (Float(totalBytesWritten)/Float(totalBytesExpectedToWrite)))
+        track("\(percentage) and \(Float(totalBytesWritten)/Float(totalBytesExpectedToWrite))")
+        //self.incrementHUD(hud, progress: Int(progress*100))
+        //self.hud.progress = Float(totalBytesWritten)/Float(totalBytesExpectedToWrite)
+        //self.hud.detailTextLabel.text = "\(percentage)% Complete"
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        downloadTask = nil
+        //progress.setProgress(0.0, animated: true)
+        if (error != nil) {
+            print("didCompleteWithError \(error?.localizedDescription ?? "no value")")
+        }
+        else {
+            print("The task finished successfully")
         }
     }
     

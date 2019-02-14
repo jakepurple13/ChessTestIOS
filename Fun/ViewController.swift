@@ -12,7 +12,9 @@ import SDDownloadManager
 import Digger
 import ASPVideoPlayer
 import VersaPlayer
-class ViewController: UIViewController {
+import UserNotifications
+import AudioToolbox
+class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var AnimeButton: UIButton!
@@ -29,7 +31,19 @@ class ViewController: UIViewController {
         NSLog("Hello world");
         print("Hello world");
         
-        
+        let center = UNUserNotificationCenter.current()
+        let options: UNAuthorizationOptions = [.alert, .sound];
+        center.requestAuthorization(options: options) {
+            (granted, error) in
+            if !granted {
+                print("Something went wrong")
+            }
+        }
+        center.getNotificationSettings { (settings) in
+            if settings.authorizationStatus != .authorized {
+                // Notifications not allowed
+            }
+        }
         
     }
     

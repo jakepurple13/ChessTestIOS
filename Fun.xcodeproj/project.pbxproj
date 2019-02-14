@@ -11,6 +11,7 @@
 		50198ADE220CAB4600A09624 /* SwipeTransition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50198ADD220CAB4600A09624 /* SwipeTransition.framework */; };
 		50198AE0220CAB4600A09624 /* SwipeTransitionAutoSwipeBack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50198ADF220CAB4600A09624 /* SwipeTransitionAutoSwipeBack.framework */; };
 		50198AE2220CAB4600A09624 /* SwipeTransitionAutoSwipeToDismiss.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50198AE1220CAB4600A09624 /* SwipeTransitionAutoSwipeToDismiss.framework */; };
+		50198AE4220CDF5400A09624 /* CustomDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50198AE3220CDF5400A09624 /* CustomDownloadManager.swift */; };
 		5027281821CE7B63009CE1D0 /* ShowApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5027281721CE7B63009CE1D0 /* ShowApi.swift */; };
 		5027281D21CE8ACB009CE1D0 /* ShowTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5027281B21CE8ACB009CE1D0 /* ShowTableViewController.swift */; };
 		50A9E19621CAA1E8009EC154 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9E19521CAA1E8009EC154 /* AppDelegate.swift */; };
@@ -52,6 +53,8 @@
 		50198ADD220CAB4600A09624 /* SwipeTransition.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwipeTransition.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50198ADF220CAB4600A09624 /* SwipeTransitionAutoSwipeBack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwipeTransitionAutoSwipeBack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50198AE1220CAB4600A09624 /* SwipeTransitionAutoSwipeToDismiss.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwipeTransitionAutoSwipeToDismiss.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50198AE3220CDF5400A09624 /* CustomDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDownloadManager.swift; sourceTree = "<group>"; };
+		50198AE52212154100A09624 /* Fun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fun.entitlements; sourceTree = "<group>"; };
 		5027281721CE7B63009CE1D0 /* ShowApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowApi.swift; sourceTree = "<group>"; };
 		5027281B21CE8ACB009CE1D0 /* ShowTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTableViewController.swift; sourceTree = "<group>"; };
 		50A9E19221CAA1E8009EC154 /* Fun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fun.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,12 +147,14 @@
 		50A9E19421CAA1E8009EC154 /* Fun */ = {
 			isa = PBXGroup;
 			children = (
+				50198AE52212154100A09624 /* Fun.entitlements */,
 				50A9E19521CAA1E8009EC154 /* AppDelegate.swift */,
 				50A9E19721CAA1E8009EC154 /* ViewController.swift */,
 				50A9E1C321CAB156009EC154 /* VideoJson.swift */,
 				5027281721CE7B63009CE1D0 /* ShowApi.swift */,
 				50A9E19921CAA1E8009EC154 /* Main.storyboard */,
 				5027281B21CE8ACB009CE1D0 /* ShowTableViewController.swift */,
+				50198AE3220CDF5400A09624 /* CustomDownloadManager.swift */,
 				50D1CF9621CEA71C002ED91D /* EpisodeViewController.swift */,
 				50A9E19C21CAA1EB009EC154 /* Assets.xcassets */,
 				50A9E19E21CAA1EB009EC154 /* LaunchScreen.storyboard */,
@@ -261,6 +266,11 @@
 				TargetAttributes = {
 					50A9E19121CAA1E8009EC154 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					50A9E1A521CAA1EB009EC154 = {
 						CreatedOnToolsVersion = 10.1;
@@ -431,6 +441,7 @@
 				50A9E19821CAA1E8009EC154 /* ViewController.swift in Sources */,
 				50A9E19621CAA1E8009EC154 /* AppDelegate.swift in Sources */,
 				50A9E1C421CAB156009EC154 /* VideoJson.swift in Sources */,
+				50198AE4220CDF5400A09624 /* CustomDownloadManager.swift in Sources */,
 				50D1CF9721CEA71C002ED91D /* EpisodeViewController.swift in Sources */,
 				5027281821CE7B63009CE1D0 /* ShowApi.swift in Sources */,
 			);
