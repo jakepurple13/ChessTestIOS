@@ -105,7 +105,13 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
                  track("ImageURL: \(e.imageUrl)")
                  track("Des: \(e.des)")
                  track("Episode Count: \(e.episodeList.count)")
-                 */
+         @IBAction func freeButton(_ sender: Any) {
+         }
+         @IBAction func actoinButton(_ sender: UIButton) {
+         }
+         @IBAction func loadVideos(_ sender: Any) {
+         }
+         */
                 self.button.titleLabel?.text = "Done"
                 
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
@@ -114,7 +120,9 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
                 
                 //nextViewController.url = list[indexPath.row].url
                 //nextViewController.list = self.lists
-                nextViewController.url = sourced.url
+         @IBAction func loadVideo(_ sender: Any) {
+         }
+         nextViewController.url = sourced.url
                 nextViewController.source = sourced
                 
                 self.present(nextViewController, animated:true, completion:nil)

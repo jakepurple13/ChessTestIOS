@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,6 +25,7 @@
 		50D1CF9721CEA71C002ED91D /* EpisodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D1CF9621CEA71C002ED91D /* EpisodeViewController.swift */; };
 		5DA4BD309E889C03C7B823F1 /* Pods_FunTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C22AD39635C818AEE0EFF7 /* Pods_FunTests.framework */; };
 		7F30D19BA4D53C1F0059851F /* Pods_FunUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D4123CE997589EABAB40480 /* Pods_FunUITests.framework */; };
+		EF7DE2C322F31EBE00909195 /* CastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7DE2C222F31EBD00909195 /* CastViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		84516C7DECF11793C646FD48 /* Pods-FunUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FunUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FunUITests/Pods-FunUITests.release.xcconfig"; sourceTree = "<group>"; };
 		97B5AA2B6486D56C0268A628 /* Pods-Fun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fun/Pods-Fun.debug.xcconfig"; sourceTree = "<group>"; };
 		E8F0ED708E482DF32FB1CDF5 /* Pods-FunTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FunTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FunTests/Pods-FunTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EF7DE2C222F31EBD00909195 /* CastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				50A9E19921CAA1E8009EC154 /* Main.storyboard */,
 				5027281B21CE8ACB009CE1D0 /* ShowTableViewController.swift */,
 				50198AE3220CDF5400A09624 /* CustomDownloadManager.swift */,
+				EF7DE2C222F31EBD00909195 /* CastViewController.swift */,
 				50D1CF9621CEA71C002ED91D /* EpisodeViewController.swift */,
 				50A9E19C21CAA1EB009EC154 /* Assets.xcassets */,
 				50A9E19E21CAA1EB009EC154 /* LaunchScreen.storyboard */,
@@ -206,6 +209,7 @@
 				50A9E18F21CAA1E8009EC154 /* Frameworks */,
 				50A9E19021CAA1E8009EC154 /* Resources */,
 				1067E227735AE7EDFAC26FF4 /* [CP] Embed Pods Frameworks */,
+				4B4FF9F9DBB5951EE4F1343D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -267,6 +271,9 @@
 					50A9E19121CAA1E8009EC154 = {
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
+							com.apple.AccessWiFi = {
+								enabled = 1;
+							};
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
 							};
@@ -335,45 +342,33 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Fun/Pods-Fun-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ASPVideoPlayer/ASPVideoPlayer.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Digger/Digger.framework",
-				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/MZDownloadManager/MZDownloadManager.framework",
-				"${BUILT_PRODUCTS_DIR}/Player/Player.framework",
-				"${BUILT_PRODUCTS_DIR}/SDDownloadManager/SDDownloadManager.framework",
-				"${BUILT_PRODUCTS_DIR}/SimpleCheckbox/SimpleCheckbox.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
-				"${BUILT_PRODUCTS_DIR}/SwipeTransition/SwipeTransition.framework",
-				"${BUILT_PRODUCTS_DIR}/SwipeTransitionAutoSwipeBack/SwipeTransitionAutoSwipeBack.framework",
-				"${BUILT_PRODUCTS_DIR}/SwipeTransitionAutoSwipeToDismiss/SwipeTransitionAutoSwipeToDismiss.framework",
-				"${BUILT_PRODUCTS_DIR}/VeloxDownloader/VeloxDownloader.framework",
-				"${BUILT_PRODUCTS_DIR}/VersaPlayer/VersaPlayer.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fun/Pods-Fun-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ASPVideoPlayer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Digger.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MZDownloadManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Player.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDDownloadManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleCheckbox.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeTransition.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeTransitionAutoSwipeBack.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeTransitionAutoSwipeToDismiss.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VeloxDownloader.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VersaPlayer.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fun/Pods-Fun-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Fun/Pods-Fun-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fun/Pods-Fun-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4B4FF9F9DBB5951EE4F1343D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fun/Pods-Fun-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fun/Pods-Fun-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fun/Pods-Fun-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C70972B0ADFE0A646E21DDD3 /* [CP] Check Pods Manifest.lock */ = {
@@ -442,6 +437,7 @@
 				50A9E19621CAA1E8009EC154 /* AppDelegate.swift in Sources */,
 				50A9E1C421CAB156009EC154 /* VideoJson.swift in Sources */,
 				50198AE4220CDF5400A09624 /* CustomDownloadManager.swift in Sources */,
+				EF7DE2C322F31EBE00909195 /* CastViewController.swift in Sources */,
 				50D1CF9721CEA71C002ED91D /* EpisodeViewController.swift in Sources */,
 				5027281821CE7B63009CE1D0 /* ShowApi.swift in Sources */,
 			);
@@ -619,6 +615,7 @@
 			baseConfigurationReference = 97B5AA2B6486D56C0268A628 /* Pods-Fun.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Fun/Fun.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HRKB86ZA48;
 				INFOPLIST_FILE = Fun/Info.plist;
@@ -638,6 +635,7 @@
 			baseConfigurationReference = 38A8290338E217D22EAAFDF1 /* Pods-Fun.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Fun/Fun.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HRKB86ZA48;
 				INFOPLIST_FILE = Fun/Info.plist;

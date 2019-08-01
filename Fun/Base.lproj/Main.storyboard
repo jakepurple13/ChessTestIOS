@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="muv-Tm-fSv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="muv-Tm-fSv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -274,6 +274,7 @@
                         <outlet property="descriptionOfShow" destination="Bgq-fa-WiH" id="1J8-BN-tgQ"/>
                         <outlet property="episodeList" destination="Gdo-Tn-evQ" id="UCI-FN-feA"/>
                         <outlet property="titleItem" destination="ihT-q1-Dls" id="maE-ca-znN"/>
+                        <segue destination="0pt-8R-4SJ" kind="presentation" id="sUy-ud-Tds"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oz8-hm-2p5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -281,10 +282,58 @@
             </objects>
             <point key="canvasLocation" x="2576.8000000000002" y="26.53673163418291"/>
         </scene>
+        <!--Cast View Controller-->
+        <scene sceneID="XfW-QZ-TrE">
+            <objects>
+                <viewController storyboardIdentifier="castactivity" id="0pt-8R-4SJ" customClass="CastViewController" customModule="Fun" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RcN-kc-6Gx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxb-nZ-Mnu">
+                                <rect key="frame" x="164" y="318" width="47" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="loadVideoWithSender:" destination="0pt-8R-4SJ" eventType="touchUpInside" id="i9Q-v9-r1b"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H51-QN-ZkP">
+                                <rect key="frame" x="166.5" y="357" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E5J-3P-bgV" customClass="GCKUICastButton">
+                                <rect key="frame" x="67" y="182" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="gxb-nZ-Mnu" firstAttribute="centerX" secondItem="RcN-kc-6Gx" secondAttribute="centerX" id="9sJ-dk-j9s"/>
+                            <constraint firstItem="gxb-nZ-Mnu" firstAttribute="leading" secondItem="SLj-Z0-1nA" secondAttribute="leading" constant="164" id="NJt-t9-B0X"/>
+                            <constraint firstItem="H51-QN-ZkP" firstAttribute="top" secondItem="gxb-nZ-Mnu" secondAttribute="bottom" constant="8" symbolic="YES" id="aQ6-9e-Md0"/>
+                            <constraint firstItem="gxb-nZ-Mnu" firstAttribute="top" secondItem="SLj-Z0-1nA" secondAttribute="top" constant="298" id="lQm-At-ymd"/>
+                            <constraint firstItem="gxb-nZ-Mnu" firstAttribute="centerX" secondItem="H51-QN-ZkP" secondAttribute="centerX" id="yQ1-jq-bom"/>
+                            <constraint firstItem="gxb-nZ-Mnu" firstAttribute="centerY" secondItem="RcN-kc-6Gx" secondAttribute="centerY" id="yjt-tv-PO4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SLj-Z0-1nA"/>
+                    </view>
+                    <connections>
+                        <outlet property="castILabel" destination="H51-QN-ZkP" id="ABj-cx-zRB"/>
+                        <outlet property="castVButton" destination="gxb-nZ-Mnu" id="ozg-2u-Wn1"/>
+                        <outlet property="castingButton" destination="E5J-3P-bgV" id="hRG-XV-uWn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Vk-mh-RZo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3420" y="18"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Zrn-SY-1Nd">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="muv-Tm-fSv" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navcontrol" automaticallyAdjustsScrollViewInsets="NO" id="muv-Tm-fSv" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Cjw-Af-rBk">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -301,6 +350,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="DMP-yv-9uW"/>
+        <segue reference="6DG-6X-d7W"/>
     </inferredMetricsTieBreakers>
 </document>

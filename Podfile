@@ -11,7 +11,7 @@ target 'Fun' do
   pod 'SwiftSoup'
   pod 'SDDownloadManager'
   pod "MZDownloadManager"
-  pod 'VeloxDownloader', '~> 1.6'
+  # pod 'VeloxDownloader', '~> 1.6'
   #pod 'TransporterSwift', '0.1.1'
   pod 'Digger'
   pod "Player", "~> 0.12.0"
@@ -24,6 +24,7 @@ target 'Fun' do
   pod "SwipeTransition"
   pod "SwipeTransitionAutoSwipeBack"      # if needed
   pod "SwipeTransitionAutoSwipeToDismiss" # if needed
+  pod 'google-cast-sdk', '< 5.0', '>=4.4.2'
   
   target 'FunTests' do
     inherit! :search_paths

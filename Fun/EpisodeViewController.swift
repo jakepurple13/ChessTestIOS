@@ -26,9 +26,12 @@ class EpisodeViewController: UIViewController, UITableViewDataSource, URLSession
     var downloadTask: URLSessionDownloadTask!
     
     var url: String = ""
-    var list = [NameAndLink]()
+    var list = [EpisodeInfo]()
     var shows: EpisodeApi? = nil
     //let hud = JGProgressHUD(style: .dark)
+    var videoTitle = ""
+    var videoDes = ""
+    var videoImage = ""
     
     required init?(coder aDecoder: NSCoder) {
         //fatalError("init(coder:) has not been implemented")
@@ -52,14 +55,17 @@ class EpisodeViewController: UIViewController, UITableViewDataSource, URLSession
         
         DispatchQueue.main.async {
             DispatchQueue.main.async {
-                self.shows = EpisodeApi(url: self.url, vc: self)
+                self.shows = EpisodeApi(url: self.url)
                 track("Name: \(self.shows!.name)")
                 track("ImageURL: \(self.shows!.imageUrl)")
                 track("Des: \(self.shows!.des)")
                 track("Episode Count: \(self.shows!.episodeList.count)")
-                    self.titleItem.title = self.shows!.name
-                self.descriptionOfShow.text = self.shows!.des
-                self.coverImage.kf.setImage(with: URL(string: self.shows!.imageUrl))
+                self.videoTitle = self.shows!.name
+                self.titleItem.title = self.videoTitle
+                self.videoDes = self.shows!.des
+                self.descriptionOfShow.text = self.videoDes
+                self.videoImage = self.shows!.imageUrl
+                self.coverImage.kf.setImage(with: URL(string: self.videoImage))
                 self.list = self.shows!.episodeList
                 self.episodeList.dataSource = self
                 self.episodeList.reloadData()
@@ -98,7 +104,7 @@ class EpisodeViewController: UIViewController, UITableViewDataSource, URLSession
     }
 
     @objc func downloadVideo(_ sender: UIButton) {
-        DispatchQueue.main.async {
+        //DispatchQueue.main.async {
             DispatchQueue.main.async {
                 /*
                 self.hud.detailTextLabel.text = "0% Complete"
@@ -106,9 +112,23 @@ class EpisodeViewController: UIViewController, UITableViewDataSource, URLSession
                 self.hud.indicatorView = JGProgressHUDPieIndicatorView()
                 self.hud.show(in: self.view)
                 */
-                self.shows!.getVideo(url: self.list[sender.tag].url)
+                //self.shows!.getVideo(url: self.list[sender.tag].url)
+                let link = self.list[sender.tag].getVideo()
+                track(link)
+                        
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "castactivity") as! CastViewController
+                
+                nextViewController.videoUrl = link
+                nextViewController.videoDes = self.videoDes
+                nextViewController.videoImage = self.videoImage
+                nextViewController.videoTitle = self.videoTitle
+                
+                self.present(nextViewController, animated:true, completion:nil)
+                
             }
-        }
+        //}
     }
     
     // MARK:- URLSessionDownloadDelegate
@@ -135,7 +155,7 @@ class EpisodeViewController: UIViewController, UITableViewDataSource, URLSession
             }
         }
         */
-        self.shows!.saveVideoTo(URL.init(string: location.path)!)
+        //self.shows!.saveVideoTo(URL.init(string: location.path)!)
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {

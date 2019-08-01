@@ -1,26 +1,32 @@
 PODS:
-  - Alamofire (5.0.0.beta.1)
-  - ASPVideoPlayer (5.0.2)
+  - Alamofire (5.0.0-beta.7)
+  - ASPVideoPlayer (6.0.0)
   - Digger (0.0.5)
+  - google-cast-sdk (4.4.3):
+    - google-cast-sdk/Core (= 4.4.3)
+    - Protobuf (~> 3.0)
+  - google-cast-sdk/Core (4.4.3):
+    - Protobuf (~> 3.0)
   - JGProgressHUD (2.0.3)
-  - Kingfisher (5.0.1)
+  - Kingfisher (5.7.0)
   - MZDownloadManager (3.5)
   - Player (0.12.1)
-  - SDDownloadManager (1.0.3)
+  - Protobuf (3.9.0)
+  - SDDownloadManager (1.1.0)
   - SimpleCheckbox (1.5.0)
-  - SwiftSoup (1.7.4)
-  - SwipeTransition (0.3.3)
-  - SwipeTransitionAutoSwipeBack (0.3.3):
-    - SwipeTransition (~> 0.3.3)
-  - SwipeTransitionAutoSwipeToDismiss (0.3.3):
-    - SwipeTransition (~> 0.3.3)
-  - VeloxDownloader (1.6)
-  - VersaPlayer (2.1.4)
+  - SwiftSoup (2.2.0)
+  - SwipeTransition (0.4.0)
+  - SwipeTransitionAutoSwipeBack (0.4.0):
+    - SwipeTransition (~> 0.4.0)
+  - SwipeTransitionAutoSwipeToDismiss (0.4.0):
+    - SwipeTransition (~> 0.4.0)
+  - VersaPlayer (3.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.0.0.beta.1)
   - ASPVideoPlayer
   - Digger
+  - google-cast-sdk (< 5.0, >= 4.4.2)
   - JGProgressHUD
   - Kingfisher (~> 5.0)
   - MZDownloadManager
@@ -31,7 +37,6 @@ DEPENDENCIES:
   - SwipeTransition
   - SwipeTransitionAutoSwipeBack
   - SwipeTransitionAutoSwipeToDismiss
-  - VeloxDownloader (~> 1.6)
   - VersaPlayer
 
 SPEC REPOS:
@@ -39,36 +44,38 @@ SPEC REPOS:
     - Alamofire
     - ASPVideoPlayer
     - Digger
+    - google-cast-sdk
     - JGProgressHUD
     - Kingfisher
     - MZDownloadManager
     - Player
+    - Protobuf
     - SDDownloadManager
     - SimpleCheckbox
     - SwiftSoup
     - SwipeTransition
     - SwipeTransitionAutoSwipeBack
     - SwipeTransitionAutoSwipeToDismiss
-    - VeloxDownloader
     - VersaPlayer
 
 SPEC CHECKSUMS:
-  Alamofire: 2ef6d6c984c5d21c366e9b41a9ae7dfee2b67a44
-  ASPVideoPlayer: f8feb3c47adfcb89a281960030165a2af69b3cbf
+  Alamofire: bd07938ceecad59d2492aeecb1f785a8f2721160
+  ASPVideoPlayer: fb3d49a1deb819c5fa093668c81fe9870750a766
   Digger: c474bde76a91e0a36f12101c5dfe7e86774b15d3
+  google-cast-sdk: fad0b26723a820bad54f550b2240810dc0fe53b9
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
-  Kingfisher: 4f771421b9208185217550528a06fd48756cb7c2
+  Kingfisher: c7d211b54f1f30d8060aadab177d52b4349c825b
   MZDownloadManager: ba9e3289d28516b1a610228012371fc41ad2f149
   Player: ae8070a33c9360f5c93c247c00236b9489f62fca
-  SDDownloadManager: ccfe81413ed647d490c993c80aa137b187fc04ab
+  Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
+  SDDownloadManager: 62a9339c03ea27606effefd9aa1800e4127e3a52
   SimpleCheckbox: 1e59697852ef3caa56a0ed1b40be0f034763b9b9
-  SwiftSoup: 92f5b348c131aed8af04f4326db1579ab19fa08c
-  SwipeTransition: d6f54986ec7b2e3b659b65ad277e831fe1438eb5
-  SwipeTransitionAutoSwipeBack: e2c75db2bec77b3100d22a560f1467c25a4062fd
-  SwipeTransitionAutoSwipeToDismiss: 94b97cde4bdc672c47e700964a90776bf19d44dd
-  VeloxDownloader: af352622cdc059830d94ca3ea013aaa3380db14d
-  VersaPlayer: 12d948a71f8479673b2f3853f84600d4a400f28f
+  SwiftSoup: 230991361c5ba249d140161860a3864a28b63860
+  SwipeTransition: 6c6a03e3706ba9c24221c5995671b460f27753b7
+  SwipeTransitionAutoSwipeBack: 467afdafe000a2a2470be81844b17f8f5e64f39e
+  SwipeTransitionAutoSwipeToDismiss: 00865eb5b2172f7fe244fb7d8fd818bbed9ff93c
+  VersaPlayer: 2c3592173e4faafbdc13b1666d96911a42901911
 
-PODFILE CHECKSUM: 36387399c9c7269ed9b091835a0439bf22d8b392
+PODFILE CHECKSUM: 6e0b78d0db1511dc66ec31d8e6325ccab7501063
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.7.0
