@@ -14,6 +14,8 @@ import ASPVideoPlayer
 import VersaPlayer
 import UserNotifications
 import AudioToolbox
+import Alamofire
+import SwiftyJSON
 class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     
     @IBOutlet weak var button: UIButton!
@@ -22,11 +24,13 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var CartoonButton: UIButton!
     @IBOutlet weak var CartoonMovieButton: UIButton!
     @IBOutlet weak var AnimeMovieButton: UIButton!
+    @IBOutlet weak var liveActionButton: UIButton!
     
     var lists = [NameAndLink]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.black
         // Do any additional setup after loading the view, typically from a nib.
         NSLog("Hello world");
         print("Hello world");
@@ -46,9 +50,35 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         }
         
     }
+
+    func convertToDictionary(text: String) -> [String: Any]? {
+        if let data = text.data(using: .utf8) {
+            do {
+                return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        return nil
+    }
     
     @IBAction func cartoonMovieSend(_ sender: Any) {
         loadInfo(sourced: Source.CARTOON_MOVIES)
+        /*DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                AF.request("https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=36357901&apikey=67053f507ef88fc99c544f4d7052dfa8", method: .get, encoding: JSONEncoding.default).responseJSON { response in
+                    //debugPrint(response)
+                    switch response.result {
+                    case .success(let value):
+                        let json = JSON(value)
+                        //print("JSON: \(json)")
+                        track("\(json["message"]["body"]["lyrics"]["lyrics_body"])")
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            }
+        }*/
     }
     
     @IBAction func animemovieSend(_ sender: Any) {
@@ -68,6 +98,9 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     }
     @IBAction func cartoonSend(_ sender: Any) {
         loadInfo(sourced: Source.CARTOON)
+    }
+    @IBAction func liveActionSend(_ sender: Any) {
+        loadInfo(sourced: Source.LIVE_ACTION)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

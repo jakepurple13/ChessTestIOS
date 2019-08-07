@@ -55,6 +55,7 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.black
         track("hello")
         
         self.searchBar.showsCancelButton = false
@@ -163,6 +164,9 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
         cell.textLabel?.text = show.name
         cell.accessoryType = indexPath.row%2==0 ? UITableViewCell.AccessoryType.checkmark : UITableViewCell.AccessoryType.none
         cell.tag = indexPath.row
+
+        cell.textLabel?.textColor = UIColor.white
+        cell.backgroundColor = UIColor.black
         //cell.nameToShow?.text = show.name
         //cell.checkFavorite?.isChecked = true
         

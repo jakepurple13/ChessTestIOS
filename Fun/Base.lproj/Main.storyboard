@@ -66,6 +66,14 @@
                                     <action selector="animemovieSend:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ROG-mv-RL5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JSo-rM-mOx">
+                                <rect key="frame" x="149" y="451" width="76" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Live Action"/>
+                                <connections>
+                                    <action selector="liveActionSend:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7ec-dw-y6J"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -78,6 +86,7 @@
                         <outlet property="CartoonMovieButton" destination="tnK-qk-QyF" id="uTo-BU-UXy"/>
                         <outlet property="RecentCartoonButton" destination="MtM-pj-zOt" id="F1S-uw-z4s"/>
                         <outlet property="button" destination="isx-uz-G5R" id="6cX-de-3aJ"/>
+                        <outlet property="liveActionButton" destination="JSo-rM-mOx" id="BqE-DI-dcH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

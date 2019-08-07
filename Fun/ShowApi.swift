@@ -17,6 +17,7 @@ import Alamofire
 import JGProgressHUD
 import UserNotifications
 import AudioToolbox
+import SwiftyJSON
 
 extension String {
     func regexed(pat: String) -> [String] {
@@ -67,7 +68,7 @@ func getUrl(url: String) -> String {
 }
 
 public enum Source {
-    case RECENT_ANIME, RECENT_CARTOON, ANIME, CARTOON, DUBBED, ANIME_MOVIES, CARTOON_MOVIES
+    case RECENT_ANIME, RECENT_CARTOON, ANIME, CARTOON, DUBBED, ANIME_MOVIES, CARTOON_MOVIES, LIVE_ACTION
 
     var url: String {
         switch self {
@@ -85,6 +86,8 @@ public enum Source {
             return "https://www.gogoanime1.com/home/anime-list"
         case .CARTOON_MOVIES:
             return "http://www.animetoon.org/movies"
+        case .LIVE_ACTION:
+            return "https://www.putlocker.fyi/a-z-shows/"
         }
     }
     var recent: Bool {
@@ -123,6 +126,8 @@ public enum Source {
             return "Anime Movies"
         case .CARTOON_MOVIES:
             return "Cartoon Movies"
+        case .LIVE_ACTION:
+            return "Live Action"
         }
     }
 
@@ -209,7 +214,22 @@ public class ShowApi: NSObject {
     }
 
     private func getVideoList(url: String) -> [NameAndLink] {
-        if (url.contains("gogoanime")) {
+        if (url.contains("putlocker")) {
+            var list = [NameAndLink]()
+            do {
+                let html: String = getUrl(url: url) as String
+                let doc: Document = try SwiftSoup.parse(html)
+                let d = try doc.select("a.az_ls_ent")
+                for element in d.array() {
+                    try list.append(NameAndLink(name: element.text(), url: "https://www.putlocker.fyi" + element.attr("href")))
+                }
+                return list
+            } catch Exception.Error(_, let message) {
+                print(message)
+            } catch {
+                print("error")
+            }
+        } else if (url.contains("gogoanime")) {
             var list = [NameAndLink]()
             do {
                 let html: String = getUrl(url: url) as String
@@ -258,6 +278,161 @@ public class ShowApi: NSObject {
 
 }
 
+public class EpisodeApi: NSObject {
+
+    var name: String = ""
+    var imageUrl: String = ""
+    var des: String = ""
+    var episodeList: [EpisodeInfo] = [EpisodeInfo]()
+
+    init(url: String) {
+        super.init()
+        do {
+
+            let html: String = getUrl(url: url) as String;
+            let doc: Document = try SwiftSoup.parse(html)
+
+            if (url.contains("putlocker")) {
+                self.name = try doc.select("li.breadcrumb-item").last()!.text()
+                self.imageUrl = try doc.select("div.thumb").select("img[src^=http]").attr("abs:src")
+                //"https://raw.githubusercontent.com/scinfu/SwiftSoup/master/swifsoup.png"
+                let infoUrl = "http://www.omdbapi.com/?t=\(self.name.replacingOccurrences(of: " ", with: "+"))&plot=full&apikey=e91b86ee"
+
+                self.des = "None right now"
+
+                let response = AF.request(infoUrl, method: .get, encoding: JSONEncoding.default).responseJSON()
+
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let year = json["Year"]
+                    let released = json["Released"]
+                    let plot = json["Plot"]
+                    self.des = "Years Active: \(year)\nReleased: \(released)\n\(plot)"
+                case .failure(let error):
+                    print(error)
+                    do {
+                        track("\(error.localizedDescription)")
+                        var textToReturn = ""
+                        let dest = try doc.select(".mov-desc")
+                        let para = try dest.select("p")
+                        var count = 1
+                        for i in para.enumerated() {
+                            let text = try i.element.text()
+                            textToReturn += text + "\n"
+                            count += 1
+                        }
+                        self.des = textToReturn
+                    } catch {
+                        self.des = "Unable to Retrieve"
+                    }
+                }
+
+                let rowList = try doc.select("div.col-lg-12").select("div.row")
+                let episodes = try rowList.select("a.btn-episode")
+                for i in episodes.array() {
+                    let vidLink = "https://www.putlocker.fyi/embed-src/\(try i.attr("data-pid"))"
+                    episodeList.append(EpisodeInfo(name: try i.text(), link: vidLink))
+                }
+            } else if (url.contains("gogoanime")) {
+
+                self.name = try doc.select("div.anime-title").text()
+                self.imageUrl = try doc.select("div.animeDetail-image").select("img[src^=http]").attr("abs:src")
+                let desc = try doc.select("p.anime-details").text()
+                if (desc.isEmpty) {
+                    self.des = "Sorry, an error has occurred"
+                } else {
+                    self.des = desc
+                }
+
+                let stuffList = try doc.select("ul.check-list").select("li")
+                var showList = [EpisodeInfo]()
+                for i in stuffList.array() {
+                    let urlInfo = try i.select("a[href^=http]")
+                    var epName = try urlInfo.text()
+                    if (epName.contains(name)) {
+                        epName = epName[..<name.endIndex].toString()
+                    }
+                    showList.append(EpisodeInfo(name: epName, link: try urlInfo.attr("abs:href")))
+                }
+
+                episodeList = showList//showList.distinctBy { it.name }
+
+            } else {
+                //name setting
+                self.name = try doc.select("div.right_col h1").text()
+                //image url setting
+                self.imageUrl = try doc.select("div.left_col").select("img[src^=http]#series_image").attr("abs:src")
+                //description setting
+                if (try doc.getAllElements().select("div#series_details").select("span#full_notes").hasText()) {
+                    let d = try doc.getAllElements().select("div#series_details").select("span#full_notes").text()
+                    let vidUrl = d
+                    let start = vidUrl.index(vidUrl.startIndex, offsetBy: 0)
+                    let end = vidUrl.index(vidUrl.endIndex, offsetBy: -4)
+                    let range = start..<end
+                    self.des = String(vidUrl[range])
+                    //dont forget to remove suffix "less"
+                } else {
+                    let d = try doc.getAllElements().select("div#series_details").select("div:contains(Description:)").select("div").text()
+                    /*do {
+                        let vidUrl = d
+                        let start = vidUrl.index(vidUrl.startIndex, offsetBy: 13)
+                        let end = vidUrl.index(vidUrl.endIndex, offsetBy: 0)
+                        let range = start..<end
+                        self.des = String(vidUrl[range])
+                        //self.des = d.substring(d.indexOf("Description: ") + 13, d.indexOf("Category: "))
+                    } catch Exception.Error( _, _) {
+                        self.des = d
+                    }*/
+                    self.des = d
+                    //return if (des.isNullOrBlank()) "Sorry, an error has occurred" else des
+                }
+
+                //episode list setting
+                getStuff(url: url)
+                let stuffLists = try doc.getAllElements().select("ul.pagination").select(" button[href^=http]")
+                for i in stuffLists {
+                    getStuff(url: try i.attr("abs:href"))
+                }
+            }
+
+        } catch Exception.Error(_, let message) {
+            print(message)
+        } catch {
+            print("error")
+        }
+    }
+
+    private func getJsonStuff(url: String, errors: @escaping (Error?) -> Void, action: @escaping (JSON) -> Void) {
+        AF.request(url, method: .get, encoding: JSONEncoding.default).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                action(json)
+            case .failure(let error):
+                print(error)
+                errors(error)
+            }
+        }
+    }
+
+    private func getStuff(url: String) {
+        do {
+            let html: String = getUrl(url: url) as String;
+            let doc: Document = try SwiftSoup.parse(html)
+            let stuffList = try doc.getAllElements().select("div#videos").select("a[href^=http]")
+            for i in stuffList {
+                episodeList.append(EpisodeInfo(name: try i.text(), link: try i.attr("abs:href")))
+            }
+        } catch Exception.Error(_, let message) {
+            print(message)
+        } catch {
+            print("error")
+        }
+    }
+
+}
+
 class EpisodeInfo {
 
     var link: String
@@ -269,7 +444,16 @@ class EpisodeInfo {
     }
 
     public func getVideo() -> String {
-        if (link.contains("gogoanime")) {
+        if (link.contains("putlocker")) {
+            let d = getUrl(url: link).regexed(pat: "<iframe[^>]+src=\"([^\"]+)\"[^>]*><\\/iframe>")
+            let s = try! SwiftSoup.parse(d[0]).select("iframe").attr("src")
+            track("here with \(s)")
+            let a = getUrl(url: s).regexed(pat: "<p[^>]+id=\"videolink\">([^>]*)<\\/p>")
+            //let s2 = try! SwiftSoup.parse(a[0]).select("p").attr("id")
+            //let s2 = try! SwiftSoup.parse(a[0]).html()
+            track("here two with \(a)")
+            return "https://verystream.com/gettoken/\(a)?mime=true"
+        } else if (link.contains("gogoanime")) {
             let html: String = getUrl(url: link) as String;
             do {
                 let doc: Document = try SwiftSoup.parse(html)
@@ -321,110 +505,6 @@ class EpisodeInfo {
 
         }
 
-    }
-
-}
-
-public class EpisodeApi: NSObject {
-
-    var name: String = ""
-    var imageUrl: String = ""
-    var des: String = ""
-    var episodeList: [EpisodeInfo] = [EpisodeInfo]()
-    //var vc: EpisodeViewController? = nil
-
-    init(url: String) {
-        super.init()
-        do {
-            if (url.contains("gogoanime")) {
-
-                let html: String = getUrl(url: url) as String;
-                let doc: Document = try SwiftSoup.parse(html)
-
-                self.name = try doc.select("div.anime-title").text()
-                self.imageUrl = try doc.select("div.animeDetail-image").select("img[src^=http]").attr("abs:src")
-                let desc = try doc.select("p.anime-details").text()
-                if (desc.isEmpty) {
-                    self.des = "Sorry, an error has occurred"
-                } else {
-                    self.des = desc
-                }
-
-                let stuffList = try doc.select("ul.check-list").select("li")
-                var showList = [EpisodeInfo]()
-                for i in stuffList.array() {
-                    let urlInfo = try i.select("a[href^=http]")
-                    var epName = try urlInfo.text()
-                    if (epName.contains(name)) {
-                        epName = epName[..<name.endIndex].toString()
-                    }
-                    showList.append(EpisodeInfo(name: epName, link: try urlInfo.attr("abs:href")))
-                }
-
-                episodeList = showList//showList.distinctBy { it.name }
-
-            } else {
-
-                let html: String = getUrl(url: url) as String;
-                let doc: Document = try SwiftSoup.parse(html)
-                //name setting
-                self.name = try doc.select("div.right_col h1").text()
-                //image url setting
-                self.imageUrl = try doc.select("div.left_col").select("img[src^=http]#series_image").attr("abs:src")
-                //description setting
-                if (try doc.getAllElements().select("div#series_details").select("span#full_notes").hasText()) {
-                    let d = try doc.getAllElements().select("div#series_details").select("span#full_notes").text()
-                    let vidUrl = d
-                    let start = vidUrl.index(vidUrl.startIndex, offsetBy: 0)
-                    let end = vidUrl.index(vidUrl.endIndex, offsetBy: -4)
-                    let range = start..<end
-                    self.des = String(vidUrl[range])
-                    //dont forget to remove suffix "less"
-                } else {
-                    let d = try doc.getAllElements().select("div#series_details").select("div:contains(Description:)").select("div").text()
-                    /*do {
-                        let vidUrl = d
-                        let start = vidUrl.index(vidUrl.startIndex, offsetBy: 13)
-                        let end = vidUrl.index(vidUrl.endIndex, offsetBy: 0)
-                        let range = start..<end
-                        self.des = String(vidUrl[range])
-                        //self.des = d.substring(d.indexOf("Description: ") + 13, d.indexOf("Category: "))
-                    } catch Exception.Error( _, _) {
-                        self.des = d
-                    }*/
-                    self.des = d
-                    //return if (des.isNullOrBlank()) "Sorry, an error has occurred" else des
-                }
-
-                //episode list setting
-                getStuff(url: url)
-                let stuffLists = try doc.getAllElements().select("ul.pagination").select(" button[href^=http]")
-                for i in stuffLists {
-                    getStuff(url: try i.attr("abs:href"))
-                }
-            }
-
-        } catch Exception.Error(_, let message
-        ) {
-            print(message)
-        } catch {
-            print("error")
-        }
-    }
-
-    private func getStuff(url: String) {
-        do {
-            let html: String = getUrl(url: url) as String;
-            let doc: Document = try SwiftSoup.parse(html)
-            let stuffList = try doc.getAllElements().select("div#videos").select("a[href^=http]")
-            for i in stuffList {
-                episodeList.append(EpisodeInfo(name: try i.text(), link: try i.attr("abs:href")))
-            }
-        } catch Exception.Error(_, let message) {
-            print(message)
-        } catch {
-            print("error")
-        }
     }
 
 }

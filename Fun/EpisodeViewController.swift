@@ -40,7 +40,8 @@ class EpisodeViewController: UIViewController, UITableViewDataSource, URLSession
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = UIColor.black
+        descriptionOfShow.textColor = UIColor.white
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         
         let backgroundSessionConfiguration = URLSessionConfiguration.background(withIdentifier: "backgroundSession")
@@ -99,7 +100,9 @@ class EpisodeViewController: UIViewController, UITableViewDataSource, URLSession
         cell.episodeNumber.text = text.name
         cell.downloadButton.tag = indexPath.row
         cell.downloadButton.addTarget(self, action: #selector(downloadVideo(_:)), for: .touchUpInside)
-        
+
+        cell.episodeNumber.textColor = UIColor.white
+        cell.backgroundColor = UIColor.black
         return cell //4.
     }
 
