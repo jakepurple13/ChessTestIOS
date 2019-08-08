@@ -22,11 +22,13 @@ import Kanna
 import WebKit
 
 extension String {
-    func regexed(pat: String) -> [String] {
+    func regexed(pat: String, modify: @escaping (String) -> String = { s in
+        return s.lowercased()
+    }) -> [String] {
         if let regex = try? NSRegularExpression(pattern: pat, options: .caseInsensitive) {
             let string = self as NSString
             return regex.matches(in: self, options: [], range: NSRange(location: 0, length: string.length)).map {
-                string.substring(with: $0.range).replacingOccurrences(of: "#", with: "").lowercased()
+                modify(string.substring(with: $0.range).replacingOccurrences(of: "#", with: ""))
             }
         }
 
@@ -452,7 +454,7 @@ class EpisodeInfo {
         }
 
         do {
-            let myHTMLString = try String(contentsOf: myURL)
+            let myHTMLString = try String(contentsOf: myURL, encoding: .utf8)
             //print("HTML : \(myHTMLString)")
             return myHTMLString// as String
         } catch let error {
@@ -463,20 +465,12 @@ class EpisodeInfo {
 
     public func getVideo() -> String {
         if (link.contains("putlocker")) {
-            let d = getUrl(url: link).regexed(pat: "<iframe[^>]+src=\"([^\"]+)\"[^>]*><\\/iframe>")
+            let d = getUrl2(url: link).regexed(pat: "<iframe[^>]+src=\"([^\"]+)\"[^>]*><\\/iframe>") { s in s }
             let s = try! SwiftSoup.parse(d[0]).select("iframe").attr("src")
-
-            //let a = getUrl2(url: s)
-
-            /*let url = URL(string: s)!
-            let a5 = try? HTML(url: url, encoding: .utf8)
-            track("\(a5?.innerHTML)")*/
-
-            let a = try! String(contentsOf: URL(string: s)!, encoding: .utf8)
-            //track("here with an a and \(a)")
-            let a1 = a.regexed(pat: "<p[^>]+id=\"videolink\">([^>]*)<\\/p>")
-            //track("here two with \(a1)")
-            return "https://verystream.com/gettoken/\(a1)?mime=true"
+            let a = try! String(contentsOf: URL(string: s)!)
+            let a1 = a.regexed(pat: "<p[^>]+id=\"videolink\">([^>]*)<\\/p>") { s in s}
+            let a2 = try! SwiftSoup.parse(a1[0]).select("p#videolink").text()
+            return "https://verystream.com/gettoken/\(a2)?mime=true"
         } else if (link.contains("gogoanime")) {
             let html: String = getUrl(url: link) as String;
             do {
