@@ -25,6 +25,7 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var CartoonMovieButton: UIButton!
     @IBOutlet weak var AnimeMovieButton: UIButton!
     @IBOutlet weak var liveActionButton: UIButton!
+    @IBOutlet weak var dubbedButton: UIButton!
     
     var lists = [NameAndLink]()
     
@@ -79,6 +80,10 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
                 }
             }
         }*/
+    }
+    
+    @IBAction func dubbedSend(_ sender: Any) {
+        loadInfo(sourced: Source.DUBBED)
     }
     
     @IBAction func animemovieSend(_ sender: Any) {

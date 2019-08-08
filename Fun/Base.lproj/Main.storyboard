@@ -74,6 +74,14 @@
                                     <action selector="liveActionSend:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7ec-dw-y6J"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8XR-fk-Pbt">
+                                <rect key="frame" x="161" y="489" width="55" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Dubbed"/>
+                                <connections>
+                                    <action selector="dubbedSend:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cxx-kl-RKq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -86,6 +94,7 @@
                         <outlet property="CartoonMovieButton" destination="tnK-qk-QyF" id="uTo-BU-UXy"/>
                         <outlet property="RecentCartoonButton" destination="MtM-pj-zOt" id="F1S-uw-z4s"/>
                         <outlet property="button" destination="isx-uz-G5R" id="6cX-de-3aJ"/>
+                        <outlet property="dubbedButton" destination="8XR-fk-Pbt" id="I3r-CC-9cs"/>
                         <outlet property="liveActionButton" destination="JSo-rM-mOx" id="BqE-DI-dcH"/>
                     </connections>
                 </viewController>

@@ -23,7 +23,7 @@ import WebKit
 
 extension String {
     func regexed(pat: String, modify: @escaping (String) -> String = { s in
-        return s.lowercased()
+        s.lowercased()
     }) -> [String] {
         if let regex = try? NSRegularExpression(pattern: pat, options: .caseInsensitive) {
             let string = self as NSString
