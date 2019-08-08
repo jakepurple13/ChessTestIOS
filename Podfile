@@ -9,6 +9,7 @@ target 'Fun' do
 
   # Pods for Fun
   pod 'SwiftSoup'
+  pod 'Kanna', '~> 4.0.0'
   pod 'SDDownloadManager'
   pod "MZDownloadManager"
   # pod 'VeloxDownloader', '~> 1.6'
@@ -20,7 +21,7 @@ target 'Fun' do
   pod 'SimpleCheckbox'
   pod 'Kingfisher', '~> 5.0'
   pod 'Alamofire', '~> 5.0.0-beta.5'
-  pod 'SwiftyJSON', '~> 4.0'
+  pod 'SwiftyJSON', '~> 5.0.0'
   pod 'JGProgressHUD'
   pod "SwipeTransition"
   pod "SwipeTransitionAutoSwipeBack"      # if needed

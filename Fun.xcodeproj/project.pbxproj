@@ -275,7 +275,7 @@
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
 							com.apple.AccessWiFi = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -619,7 +619,6 @@
 			baseConfigurationReference = 97B5AA2B6486D56C0268A628 /* Pods-Fun.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Fun/Fun.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HRKB86ZA48;
 				INFOPLIST_FILE = Fun/Info.plist;
@@ -639,7 +638,6 @@
 			baseConfigurationReference = 38A8290338E217D22EAAFDF1 /* Pods-Fun.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Fun/Fun.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HRKB86ZA48;
 				INFOPLIST_FILE = Fun/Info.plist;

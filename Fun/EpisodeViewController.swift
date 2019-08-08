@@ -9,6 +9,7 @@
 import UIKit
 import Kingfisher
 import JGProgressHUD
+import WebKit
 class EpisodeTableCell: UITableViewCell {
     @IBOutlet weak var episodeNumber: UILabel!
     @IBOutlet weak var downloadButton: UIButton!

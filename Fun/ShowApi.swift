@@ -18,12 +18,13 @@ import JGProgressHUD
 import UserNotifications
 import AudioToolbox
 import SwiftyJSON
+import Kanna
+import WebKit
 
 extension String {
     func regexed(pat: String) -> [String] {
         if let regex = try? NSRegularExpression(pattern: pat, options: .caseInsensitive) {
             let string = self as NSString
-
             return regex.matches(in: self, options: [], range: NSRange(location: 0, length: string.length)).map {
                 string.substring(with: $0.range).replacingOccurrences(of: "#", with: "").lowercased()
             }
@@ -52,15 +53,15 @@ public func track(_ message: String, file: String = #file, function: String = #f
 
 func getUrl(url: String) -> String {
     let myURLString = url
-    guard let myURL = URL(string: myURLString as String) else {
+    guard let myURL = URL(string: myURLString) else {
         //print("Error: \(myURLString) doesn't seem to be a valid URL")
-        return myURLString as String
+        return myURLString// as String
     }
 
     do {
         let myHTMLString = try String(contentsOf: myURL, encoding: .ascii)
         //print("HTML : \(myHTMLString)")
-        return myHTMLString as String
+        return myHTMLString// as String
     } catch let error {
         //print("Error: \(error)")
         return error.localizedDescription as String
@@ -403,7 +404,7 @@ public class EpisodeApi: NSObject {
         }
     }
 
-    private func getJsonStuff(url: String, errors: @escaping (Error?) -> Void, action: @escaping (JSON) -> Void) {
+    private func getJsonStuff(url: String, errors: @escaping (Error?) -> Void, action: @escaping (SwiftyJSON.JSON) -> Void) {
         AF.request(url, method: .get, encoding: JSONEncoding.default).responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -443,16 +444,39 @@ class EpisodeInfo {
         self.name = name
     }
 
+    func getUrl2(url: String) -> String {
+        let myURLString = url
+        guard let myURL = URL(string: myURLString) else {
+            //print("Error: \(myURLString) doesn't seem to be a valid URL")
+            return myURLString// as String
+        }
+
+        do {
+            let myHTMLString = try String(contentsOf: myURL)
+            //print("HTML : \(myHTMLString)")
+            return myHTMLString// as String
+        } catch let error {
+            //print("Error: \(error)")
+            return error.localizedDescription as String
+        }
+    }
+
     public func getVideo() -> String {
         if (link.contains("putlocker")) {
             let d = getUrl(url: link).regexed(pat: "<iframe[^>]+src=\"([^\"]+)\"[^>]*><\\/iframe>")
             let s = try! SwiftSoup.parse(d[0]).select("iframe").attr("src")
-            track("here with \(s)")
-            let a = getUrl(url: s).regexed(pat: "<p[^>]+id=\"videolink\">([^>]*)<\\/p>")
-            //let s2 = try! SwiftSoup.parse(a[0]).select("p").attr("id")
-            //let s2 = try! SwiftSoup.parse(a[0]).html()
-            track("here two with \(a)")
-            return "https://verystream.com/gettoken/\(a)?mime=true"
+
+            //let a = getUrl2(url: s)
+
+            /*let url = URL(string: s)!
+            let a5 = try? HTML(url: url, encoding: .utf8)
+            track("\(a5?.innerHTML)")*/
+
+            let a = try! String(contentsOf: URL(string: s)!, encoding: .utf8)
+            //track("here with an a and \(a)")
+            let a1 = a.regexed(pat: "<p[^>]+id=\"videolink\">([^>]*)<\\/p>")
+            //track("here two with \(a1)")
+            return "https://verystream.com/gettoken/\(a1)?mime=true"
         } else if (link.contains("gogoanime")) {
             let html: String = getUrl(url: link) as String;
             do {

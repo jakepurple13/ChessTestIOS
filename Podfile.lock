@@ -8,6 +8,7 @@ PODS:
   - google-cast-sdk/Core (4.4.3):
     - Protobuf (~> 3.0)
   - JGProgressHUD (2.0.3)
+  - Kanna (4.0.3)
   - Kingfisher (5.7.0)
   - MZDownloadManager (3.5)
   - Player (0.12.1)
@@ -15,7 +16,7 @@ PODS:
   - SDDownloadManager (1.1.0)
   - SimpleCheckbox (1.5.0)
   - SwiftSoup (2.2.0)
-  - SwiftyJSON (4.3.0)
+  - SwiftyJSON (5.0.0)
   - SwipeTransition (0.4.0)
   - SwipeTransitionAutoSwipeBack (0.4.0):
     - SwipeTransition (~> 0.4.0)
@@ -29,13 +30,14 @@ DEPENDENCIES:
   - Digger
   - google-cast-sdk (< 5.0, >= 4.4.2)
   - JGProgressHUD
+  - Kanna (~> 4.0.0)
   - Kingfisher (~> 5.0)
   - MZDownloadManager
   - Player (~> 0.12.0)
   - SDDownloadManager
   - SimpleCheckbox
   - SwiftSoup
-  - SwiftyJSON (~> 4.0)
+  - SwiftyJSON (~> 5.0.0)
   - SwipeTransition
   - SwipeTransitionAutoSwipeBack
   - SwipeTransitionAutoSwipeToDismiss
@@ -48,6 +50,7 @@ SPEC REPOS:
     - Digger
     - google-cast-sdk
     - JGProgressHUD
+    - Kanna
     - Kingfisher
     - MZDownloadManager
     - Player
@@ -67,6 +70,7 @@ SPEC CHECKSUMS:
   Digger: c474bde76a91e0a36f12101c5dfe7e86774b15d3
   google-cast-sdk: fad0b26723a820bad54f550b2240810dc0fe53b9
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
+  Kanna: 0ebbdd0e7e3308f0aafbd569e79c8cadc5eb877c
   Kingfisher: c7d211b54f1f30d8060aadab177d52b4349c825b
   MZDownloadManager: ba9e3289d28516b1a610228012371fc41ad2f149
   Player: ae8070a33c9360f5c93c247c00236b9489f62fca
@@ -74,12 +78,12 @@ SPEC CHECKSUMS:
   SDDownloadManager: 62a9339c03ea27606effefd9aa1800e4127e3a52
   SimpleCheckbox: 1e59697852ef3caa56a0ed1b40be0f034763b9b9
   SwiftSoup: 230991361c5ba249d140161860a3864a28b63860
-  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   SwipeTransition: 6c6a03e3706ba9c24221c5995671b460f27753b7
   SwipeTransitionAutoSwipeBack: 467afdafe000a2a2470be81844b17f8f5e64f39e
   SwipeTransitionAutoSwipeToDismiss: 00865eb5b2172f7fe244fb7d8fd818bbed9ff93c
   VersaPlayer: 2c3592173e4faafbdc13b1666d96911a42901911
 
-PODFILE CHECKSUM: d906c3d278975f1e21f51528777722ce8da2b687
+PODFILE CHECKSUM: 038965485bb8e6c0cc0236c4b199dba7c85d14e1
 
 COCOAPODS: 1.7.0

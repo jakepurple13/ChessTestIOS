@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GCKLoggerDelegate {
     
     var window: UIWindow?
     
-    let kReceiverAppID = "C0868879"
+    let kReceiverAppID = "CC1AD845"
     let kDebugLoggingEnabled = true
 
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {

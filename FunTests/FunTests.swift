@@ -22,6 +22,12 @@ class FunTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let s = ShowApi(source: Source.LIVE_ACTION).showList
+        let rando = s[0]//.randomElement()!
+        track("\(rando.name) with \(rando.url)")
+        let a = EpisodeApi(url: rando.url)
+        let z = a.episodeList[0]
+        track("\(z.getVideo())")
     }
 
     func testPerformanceExample() {
