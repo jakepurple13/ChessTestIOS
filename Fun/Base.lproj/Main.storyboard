@@ -139,9 +139,10 @@
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="sectionIndexColor" cocoaTouchSystemColor="lightTextColor"/>
                                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search Shows" id="nuX-yX-IDL">
+                                    <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="prominent" placeholder="Search Shows" showsCancelButton="YES" id="nuX-yX-IDL">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="barTintColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="go"/>
                                         <scopeButtonTitles>
                                             <string>Title</string>
@@ -255,31 +256,56 @@
                                 <color key="sectionIndexColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="episode_number" rowHeight="45" id="vhz-J4-n2J" customClass="EpisodeTableCell" customModule="Fun" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="45"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="episode_number" rowHeight="100" id="vhz-J4-n2J" customClass="EpisodeTableCell" customModule="Fun" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vhz-J4-n2J" id="7vo-HH-75R">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0f-RJ-wfA">
-                                                    <rect key="frame" x="15" y="0.0" width="280" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0f-RJ-wfA">
+                                                    <rect key="frame" x="14" y="0.0" width="184" height="99.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="184" id="UJH-hd-7hc"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nAG-wc-mSM">
-                                                    <rect key="frame" x="303" y="6" width="69" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6V-hX-fey">
+                                                    <rect key="frame" x="246" y="14" width="49" height="71.5"/>
+                                                    <state key="normal" title="Stream"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="97W-gl-fGs">
+                                                    <rect key="frame" x="206" y="14" width="32" height="71.5"/>
+                                                    <state key="normal" title="Cast"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nAG-wc-mSM">
+                                                    <rect key="frame" x="303" y="14" width="69" height="71.5"/>
                                                     <state key="normal" title="Download"/>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="nAG-wc-mSM" firstAttribute="leading" secondItem="h6V-hX-fey" secondAttribute="trailing" constant="8" symbolic="YES" id="3bA-VG-v2c"/>
+                                                <constraint firstItem="i0f-RJ-wfA" firstAttribute="leading" secondItem="7vo-HH-75R" secondAttribute="leadingMargin" constant="-1" id="7o2-Xk-gJC"/>
+                                                <constraint firstItem="i0f-RJ-wfA" firstAttribute="centerY" secondItem="7vo-HH-75R" secondAttribute="centerY" id="D6e-Ut-uoo"/>
+                                                <constraint firstItem="97W-gl-fGs" firstAttribute="baseline" secondItem="h6V-hX-fey" secondAttribute="firstBaseline" id="J2J-My-Ru0"/>
+                                                <constraint firstItem="i0f-RJ-wfA" firstAttribute="top" secondItem="7vo-HH-75R" secondAttribute="top" id="QvI-Zd-4TJ"/>
+                                                <constraint firstItem="97W-gl-fGs" firstAttribute="centerY" secondItem="7vo-HH-75R" secondAttribute="centerY" id="dzj-rO-CBl"/>
+                                                <constraint firstItem="97W-gl-fGs" firstAttribute="leading" secondItem="i0f-RJ-wfA" secondAttribute="trailing" constant="8" symbolic="YES" id="g0g-bU-Adi"/>
+                                                <constraint firstItem="97W-gl-fGs" firstAttribute="top" secondItem="nAG-wc-mSM" secondAttribute="top" id="hzg-Ay-oSM"/>
+                                                <constraint firstItem="97W-gl-fGs" firstAttribute="top" secondItem="7vo-HH-75R" secondAttribute="topMargin" constant="3" id="oIW-il-wRC"/>
+                                                <constraint firstItem="97W-gl-fGs" firstAttribute="top" secondItem="h6V-hX-fey" secondAttribute="top" id="rhy-kb-OW9"/>
+                                                <constraint firstItem="97W-gl-fGs" firstAttribute="baseline" secondItem="nAG-wc-mSM" secondAttribute="firstBaseline" id="uy6-Qt-IVo"/>
+                                                <constraint firstItem="h6V-hX-fey" firstAttribute="leading" secondItem="97W-gl-fGs" secondAttribute="trailing" constant="8" symbolic="YES" id="v9l-IM-IPY"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="castButton" destination="97W-gl-fGs" id="5e5-9i-odN"/>
                                             <outlet property="downloadButton" destination="nAG-wc-mSM" id="Amv-ZP-xbc"/>
                                             <outlet property="episodeNumber" destination="i0f-RJ-wfA" id="eBH-JC-L4L"/>
+                                            <outlet property="streamButton" destination="h6V-hX-fey" id="iY7-1Y-Eq6"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -288,30 +314,31 @@
                                 <rect key="frame" x="0.0" y="64" width="176" height="212"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="31" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bgq-fa-WiH">
-                                <rect key="frame" x="184" y="64" width="175" height="212"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gvc-89-L7J">
+                                <rect key="frame" x="184" y="64" width="191" height="212"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">A young priestess has formed her first adventuring party, but almost immediately they find themselves in distress. It's the Goblin Slayer who comes to their rescueâa man who's dedicated his life to the extermination of all goblins, by any means necessary. And when rumors of his feats begin to circulate, there's no telling who might come calling next...</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Bb5-ly-PVI"/>
                     </view>
                     <connections>
                         <outlet property="coverImage" destination="dRq-HE-4rW" id="hmv-vs-kUo"/>
-                        <outlet property="descriptionOfShow" destination="Bgq-fa-WiH" id="1J8-BN-tgQ"/>
+                        <outlet property="descriptionOfShow" destination="gvc-89-L7J" id="z1l-Yi-vAN"/>
                         <outlet property="episodeList" destination="Gdo-Tn-evQ" id="UCI-FN-feA"/>
                         <outlet property="titleItem" destination="ihT-q1-Dls" id="maE-ca-znN"/>
                         <segue destination="0pt-8R-4SJ" kind="presentation" id="sUy-ud-Tds"/>
+                        <segue destination="oZl-7d-9I6" kind="presentation" id="ttE-i7-h7x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oz8-hm-2p5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="6mt-Yt-VG5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2576.8000000000002" y="26.53673163418291"/>
+            <point key="canvasLocation" x="2584.8000000000002" y="17.541229385307346"/>
         </scene>
         <!--Cast View Controller-->
         <scene sceneID="XfW-QZ-TrE">
@@ -334,7 +361,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E5J-3P-bgV" customClass="GCKUICastButton">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E5J-3P-bgV" customClass="GCKUICastButton" customModule="Fun" customModuleProvider="target">
                                 <rect key="frame" x="67" y="182" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -359,7 +386,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Vk-mh-RZo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3420" y="18"/>
+            <point key="canvasLocation" x="3414" y="-248"/>
+        </scene>
+        <!--Video View Controller-->
+        <scene sceneID="cHn-Kf-Vj0">
+            <objects>
+                <viewController id="oZl-7d-9I6" customClass="VideoViewController" customModule="Fun" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dvs-bU-Ms6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="bSi-5q-6hj"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yza-pe-Rdo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3414" y="418"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Zrn-SY-1Nd">

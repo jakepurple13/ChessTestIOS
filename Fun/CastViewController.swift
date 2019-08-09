@@ -18,7 +18,7 @@ class CastViewController: UIViewController, GCKSessionManagerListener, GCKRemote
     @IBOutlet weak var castingButton: GCKUICastButton!
     @IBOutlet weak var castVButton: UIButton!
     @IBOutlet weak var castILabel: UILabel!
-    
+
     
     //@IBOutlet var castVideoButton: UIButton!
     //@IBOutlet var castInstructionLabel: UILabel!
@@ -34,9 +34,9 @@ class CastViewController: UIViewController, GCKSessionManagerListener, GCKRemote
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.black
-        self.castILabel.backgroundColor = UIColor.black
-        self.castILabel.textColor = UIColor.white
+        //self.view.backgroundColor = UIColor.black
+        //self.castILabel.backgroundColor = UIColor.black
+        //self.castILabel.textColor = UIColor.white
         
         // Initially hide the cast button until a session is started.
         showLoadVideoButton(showButton: false)

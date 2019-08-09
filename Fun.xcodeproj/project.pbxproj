@@ -26,6 +26,7 @@
 		5DA4BD309E889C03C7B823F1 /* Pods_FunTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C22AD39635C818AEE0EFF7 /* Pods_FunTests.framework */; };
 		60B168C685B8BDCA7D4488C7 /* AlamofireSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B169D6A239307BEC142BCD /* AlamofireSync.swift */; };
 		7F30D19BA4D53C1F0059851F /* Pods_FunUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D4123CE997589EABAB40480 /* Pods_FunUITests.framework */; };
+		EF32FA5D22FD95EA00CA3956 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF32FA5C22FD95EA00CA3956 /* VideoViewController.swift */; };
 		EF7DE2C322F31EBE00909195 /* CastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7DE2C222F31EBD00909195 /* CastViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		84516C7DECF11793C646FD48 /* Pods-FunUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FunUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FunUITests/Pods-FunUITests.release.xcconfig"; sourceTree = "<group>"; };
 		97B5AA2B6486D56C0268A628 /* Pods-Fun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fun/Pods-Fun.debug.xcconfig"; sourceTree = "<group>"; };
 		E8F0ED708E482DF32FB1CDF5 /* Pods-FunTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FunTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FunTests/Pods-FunTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EF32FA5C22FD95EA00CA3956 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		EF7DE2C222F31EBD00909195 /* CastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,6 +155,7 @@
 			children = (
 				50198AE52212154100A09624 /* Fun.entitlements */,
 				50A9E19521CAA1E8009EC154 /* AppDelegate.swift */,
+				EF32FA5C22FD95EA00CA3956 /* VideoViewController.swift */,
 				50A9E19721CAA1E8009EC154 /* ViewController.swift */,
 				50A9E1C321CAB156009EC154 /* VideoJson.swift */,
 				5027281721CE7B63009CE1D0 /* ShowApi.swift */,
@@ -443,6 +446,7 @@
 				EF7DE2C322F31EBE00909195 /* CastViewController.swift in Sources */,
 				50D1CF9721CEA71C002ED91D /* EpisodeViewController.swift in Sources */,
 				5027281821CE7B63009CE1D0 /* ShowApi.swift in Sources */,
+				EF32FA5D22FD95EA00CA3956 /* VideoViewController.swift in Sources */,
 				60B168C685B8BDCA7D4488C7 /* AlamofireSync.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

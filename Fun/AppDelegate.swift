@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleCast
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GCKLoggerDelegate {
@@ -57,6 +58,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GCKLoggerDelegate {
         let filter = GCKLoggerFilter()
         filter.minimumLevel = .error
         GCKLogger.sharedInstance().filter = filter
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playback, mode: .moviePlayback)
+        }
+        catch {
+            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+        }
+        return true
         
 //        // Wrap main view in the GCKUICastContainerViewController and display the mini controller.
 //        let appStoryboard = UIStoryboard(name: "Main", bundle: nil)
