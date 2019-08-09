@@ -42,6 +42,7 @@ class EpisodeViewController: UIViewController, UITableViewDataSource, URLSession
 
     let t = RepeatingTimer(timeInterval: 1)
     var counter = 0
+    var start = NSDate.timeIntervalSinceReferenceDate
 
     required init?(coder aDecoder: NSCoder) {
         //fatalError("init(coder:) has not been implemented")
@@ -56,7 +57,7 @@ class EpisodeViewController: UIViewController, UITableViewDataSource, URLSession
 
         //self.episodeList.rowHeight = UITableView.automaticDimension
         //self.episodeList.estimatedRowHeight = 75
-        
+
         let backgroundSessionConfiguration = URLSessionConfiguration.background(withIdentifier: "backgroundSession")
         defaultSession = Foundation.URLSession(configuration: backgroundSessionConfiguration, delegate: self, delegateQueue: OperationQueue.main)
 
@@ -77,7 +78,7 @@ class EpisodeViewController: UIViewController, UITableViewDataSource, URLSession
                 self.videoTitle = self.shows!.name
                 self.titleItem.title = self.videoTitle
                 self.videoDes = self.shows!.des
-                self.descriptionOfShow.text = self.videoDes
+                self.descriptionOfShow.text = "\(self.url)\n\(self.videoDes)"
                 self.videoImage = self.shows!.imageUrl
                 self.coverImage.kf.setImage(with: URL(string: self.videoImage))
                 self.list = self.shows!.episodeList
@@ -146,6 +147,7 @@ class EpisodeViewController: UIViewController, UITableViewDataSource, URLSession
 
     @objc func downloadVideo(_ sender: UIButton) {
         DispatchQueue.main.async {
+            self.counter = 0
             self.t.eventHandler = {
                 //print("Timer Fired")
                 self.counter += 1
@@ -156,6 +158,7 @@ class EpisodeViewController: UIViewController, UITableViewDataSource, URLSession
                     self.t.suspend()
                 }
             }
+            self.start = NSDate.timeIntervalSinceReferenceDate
             //self.hud.detailTextLabel.text = "0% Complete"
             self.hud.detailTextLabel.text = "Please Wait"
             self.hud.textLabel.text = "Downloading..."
@@ -260,9 +263,10 @@ class EpisodeViewController: UIViewController, UITableViewDataSource, URLSession
     // MARK:- URLSessionDownloadDelegate
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         self.t.suspend()
-        self.hud.dismiss(animated: true)
+        self.hud.textLabel.text = "Completed\n\(self.counter) seconds have passed"
+        self.hud.dismiss(afterDelay: 2.5, animated: true)
         //print(downloadTask)
-        print("File download succesfully")
+        print("File download successfully")
         guard let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return
         }
@@ -281,7 +285,7 @@ class EpisodeViewController: UIViewController, UITableViewDataSource, URLSession
                         if completed {
                             print("Video asset created")
                         } else {
-                            print(error?.localizedDescription)
+                            print(error?.localizedDescription ?? "Whelp!")
                         }
                     }
                 }
@@ -313,8 +317,10 @@ class EpisodeViewController: UIViewController, UITableViewDataSource, URLSession
 
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         //progress.setProgress(Float(totalBytesWritten)/Float(totalBytesExpectedToWrite), animated: true)
+        let speed = Double(bytesWritten) / (NSDate.timeIntervalSinceReferenceDate - self.start);
+
         let percentage = String(format: "%.2f %", (Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)) * 100)
-        self.hud.detailTextLabel.text = "\(percentage)% Complete"
+        self.hud.detailTextLabel.text = "\(percentage)% Complete\n\(self.getDownloadSpeedString(downloadedBytes: speed))"
         track("\(percentage) and \(Float(totalBytesWritten) / Float(totalBytesExpectedToWrite))")
         //self.incrementHUD(hud, progress: Int(progress*100))
         self.hud.setProgress(Float(totalBytesWritten) / Float(totalBytesExpectedToWrite), animated: true)
@@ -329,6 +335,32 @@ class EpisodeViewController: UIViewController, UITableViewDataSource, URLSession
         } else {
             print("The task finished successfully")
         }
+    }
+
+    private func getDownloadSpeedString(downloadedBytes: Double) -> String {
+        if (downloadedBytes < 0) {
+            return ""
+        }
+        let kb = downloadedBytes / 1000
+        let mb = kb / 1000
+        let gb = mb / 1000
+        let tb = gb / 1000
+
+        var s = ""
+
+        if (tb >= 1) {
+            s = String(format: "%.2f tb/s", tb)
+        } else if (gb >= 1) {
+            s = String(format: "%.2f gb/s", gb)
+        } else if (mb >= 1) {
+            s = String(format: "%.2f mb/s", mb)
+        } else if (kb >= 1) {
+            s = String(format: "%.2f kb/s", kb)
+        } else {
+            s = String(format: "%.2f b/s", downloadedBytes)
+        }
+
+        return s
     }
 
 }
