@@ -40,7 +40,6 @@ class CastViewController: UIViewController, GCKSessionManagerListener, GCKRemote
         //self.castILabel.backgroundColor = UIColor.black
         //self.castILabel.textColor = UIColor.white
 
-        Casty.shared.setupCasty(appId: "CC1AD845", useExpandedControls: true)
         Casty.shared.initialize()
 
         // Initially hide the cast button until a session is started.
@@ -64,12 +63,12 @@ class CastViewController: UIViewController, GCKSessionManagerListener, GCKRemote
         //this image will show up in expanded controller as well as video thumb
         //let image = GCKImage(url: URL(string: self.videoImage)!, width: 480, height: 360)
 
-        Casty.didStartSession = { _ in
+        /*Casty.didStartSession = { _ in
             //Casty.shared.loadMedia(url: self.videoUrl, title: self.videoTitle, image: image, streamType: .buffered)
             Casty.shared.loadMedia(mediaInformation: self.getMediaInfo())
             Casty.shared.presentExpandedController()
             Casty.shared.addMiniController(toParentViewController: self)
-        }
+        }*/
 
         /*let bbb = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
         bbb.titleLabel?.text = "asdf"
@@ -176,6 +175,13 @@ class CastViewController: UIViewController, GCKSessionManagerListener, GCKRemote
         session.remoteMediaClient?.add(self)
 
         showLoadVideoButton(showButton: true)
+
+        Casty.didStartSession = { _ in
+            //Casty.shared.loadMedia(url: self.videoUrl, title: self.videoTitle, image: image, streamType: .buffered)
+            Casty.shared.loadMedia(mediaInformation: self.getMediaInfo())
+            Casty.shared.presentExpandedController()
+            Casty.shared.addMiniController(toParentViewController: self)
+        }
 
         /*//this image will show up in expanded controller as well as video thumb
         let image = GCKImage(url: URL(string: self.videoImage)!,

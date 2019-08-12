@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleCast
+import Casty
 import AVFoundation
 
 @UIApplicationMain
@@ -29,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GCKLoggerDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         // Set your receiver application ID.
+        Casty.shared.setupCasty(appId: kReceiverAppID, useExpandedControls: true)
         let criteria = GCKDiscoveryCriteria(applicationID: kReceiverAppID)
         let options = GCKCastOptions(discoveryCriteria: criteria)
         options.physicalVolumeButtonsWillControlDeviceVolume = true
