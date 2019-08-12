@@ -26,7 +26,8 @@ target 'Fun' do
   pod "SwipeTransition"
   pod "SwipeTransitionAutoSwipeBack"      # if needed
   pod "SwipeTransitionAutoSwipeToDismiss" # if needed
-  pod 'google-cast-sdk', '< 5.0', '>=4.4.2'
+  pod 'google-cast-sdk'
+  pod 'Casty'
   
   target 'FunTests' do
     inherit! :search_paths

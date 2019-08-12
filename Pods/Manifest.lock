@@ -1,15 +1,17 @@
 PODS:
   - Alamofire (5.0.0-beta.7)
   - ASPVideoPlayer (6.0.0)
+  - Casty (0.3.2):
+    - google-cast-sdk
   - Digger (0.0.5)
   - google-cast-sdk (4.4.3):
     - google-cast-sdk/Core (= 4.4.3)
     - Protobuf (~> 3.0)
   - google-cast-sdk/Core (4.4.3):
     - Protobuf (~> 3.0)
-  - JGProgressHUD (2.0.3)
+  - JGProgressHUD (2.0.4)
   - Kanna (4.0.3)
-  - Kingfisher (5.7.0)
+  - Kingfisher (5.7.1)
   - MZDownloadManager (3.5)
   - Player (0.12.1)
   - Protobuf (3.9.0)
@@ -27,8 +29,9 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 5.0.0-beta.5)
   - ASPVideoPlayer
+  - Casty
   - Digger
-  - google-cast-sdk (< 5.0, >= 4.4.2)
+  - google-cast-sdk
   - JGProgressHUD
   - Kanna (~> 4.0.0)
   - Kingfisher (~> 5.0)
@@ -47,6 +50,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - ASPVideoPlayer
+    - Casty
     - Digger
     - google-cast-sdk
     - JGProgressHUD
@@ -67,11 +71,12 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: bd07938ceecad59d2492aeecb1f785a8f2721160
   ASPVideoPlayer: fb3d49a1deb819c5fa093668c81fe9870750a766
+  Casty: 028ba55a678bde18ca31da7c8a248beb51bdae24
   Digger: c474bde76a91e0a36f12101c5dfe7e86774b15d3
   google-cast-sdk: fad0b26723a820bad54f550b2240810dc0fe53b9
-  JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
+  JGProgressHUD: 62658b14e72cccf179efc7a13bcb54d30b92fc22
   Kanna: 0ebbdd0e7e3308f0aafbd569e79c8cadc5eb877c
-  Kingfisher: c7d211b54f1f30d8060aadab177d52b4349c825b
+  Kingfisher: 176d377ad339113c99ad4980cbae687f807e20fe
   MZDownloadManager: ba9e3289d28516b1a610228012371fc41ad2f149
   Player: ae8070a33c9360f5c93c247c00236b9489f62fca
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
@@ -84,6 +89,6 @@ SPEC CHECKSUMS:
   SwipeTransitionAutoSwipeToDismiss: 00865eb5b2172f7fe244fb7d8fd818bbed9ff93c
   VersaPlayer: 2c3592173e4faafbdc13b1666d96911a42901911
 
-PODFILE CHECKSUM: 038965485bb8e6c0cc0236c4b199dba7c85d14e1
+PODFILE CHECKSUM: 0dcfa3ebd169a373290bf9c8276a9b0504557f9c
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.7.0

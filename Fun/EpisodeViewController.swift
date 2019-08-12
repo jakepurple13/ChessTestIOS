@@ -254,7 +254,7 @@ class EpisodeViewController: UIViewController, UITableViewDataSource, URLSession
             nextViewController.videoImage = self.videoImage
             nextViewController.videoTitle = self.videoTitle
 
-            self.present(nextViewController, animated: true, completion: nil)
+            self.present(UINavigationController(rootViewController: nextViewController), animated: true, completion: nil)
 
         }
         //}

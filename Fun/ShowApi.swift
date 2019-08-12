@@ -49,10 +49,6 @@ extension Substring {
     }
 }
 
-public func track(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
-    print("\(message) called from \(function) \(file):\(line)")
-}
-
 func getUrl(url: String) -> String {
     let myURLString = url
     guard let myURL = URL(string: myURLString) else {

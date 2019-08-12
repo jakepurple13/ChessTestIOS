@@ -16,7 +16,6 @@
 		5027281D21CE8ACB009CE1D0 /* ShowTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5027281B21CE8ACB009CE1D0 /* ShowTableViewController.swift */; };
 		50A9E19621CAA1E8009EC154 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9E19521CAA1E8009EC154 /* AppDelegate.swift */; };
 		50A9E19821CAA1E8009EC154 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9E19721CAA1E8009EC154 /* ViewController.swift */; };
-		50A9E19B21CAA1E8009EC154 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50A9E19921CAA1E8009EC154 /* Main.storyboard */; };
 		50A9E19D21CAA1EB009EC154 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50A9E19C21CAA1EB009EC154 /* Assets.xcassets */; };
 		50A9E1A021CAA1EB009EC154 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50A9E19E21CAA1EB009EC154 /* LaunchScreen.storyboard */; };
 		50A9E1AB21CAA1EB009EC154 /* FunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9E1AA21CAA1EB009EC154 /* FunTests.swift */; };
@@ -24,10 +23,13 @@
 		50A9E1C421CAB156009EC154 /* VideoJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9E1C321CAB156009EC154 /* VideoJson.swift */; };
 		50D1CF9721CEA71C002ED91D /* EpisodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D1CF9621CEA71C002ED91D /* EpisodeViewController.swift */; };
 		5DA4BD309E889C03C7B823F1 /* Pods_FunTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C22AD39635C818AEE0EFF7 /* Pods_FunTests.framework */; };
+		60B1677B07C1ED343362145B /* EasyGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B16DD10F50EB0792EF8584 /* EasyGesture.swift */; };
 		60B168C685B8BDCA7D4488C7 /* AlamofireSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B169D6A239307BEC142BCD /* AlamofireSync.swift */; };
+		60B16A26D92937E5CD7C4827 /* Loged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B160375C3C56F0DA00E6B3 /* Loged.swift */; };
 		7F30D19BA4D53C1F0059851F /* Pods_FunUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D4123CE997589EABAB40480 /* Pods_FunUITests.framework */; };
 		EF32FA5D22FD95EA00CA3956 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF32FA5C22FD95EA00CA3956 /* VideoViewController.swift */; };
 		EF7DE2C322F31EBE00909195 /* CastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7DE2C222F31EBD00909195 /* CastViewController.swift */; };
+		EFCFE0A92301A8C8009AAE8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50A9E19921CAA1E8009EC154 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,7 +77,9 @@
 		50A9E1B721CAA1EB009EC154 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50A9E1C321CAB156009EC154 /* VideoJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoJson.swift; sourceTree = "<group>"; };
 		50D1CF9621CEA71C002ED91D /* EpisodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewController.swift; sourceTree = "<group>"; };
+		60B160375C3C56F0DA00E6B3 /* Loged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loged.swift; sourceTree = "<group>"; };
 		60B169D6A239307BEC142BCD /* AlamofireSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireSync.swift; sourceTree = "<group>"; };
+		60B16DD10F50EB0792EF8584 /* EasyGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyGesture.swift; sourceTree = "<group>"; };
 		717F930C67424DE19E08D95A /* Pods-FunTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FunTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FunTests/Pods-FunTests.release.xcconfig"; sourceTree = "<group>"; };
 		84516C7DECF11793C646FD48 /* Pods-FunUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FunUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FunUITests/Pods-FunUITests.release.xcconfig"; sourceTree = "<group>"; };
 		97B5AA2B6486D56C0268A628 /* Pods-Fun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fun/Pods-Fun.debug.xcconfig"; sourceTree = "<group>"; };
@@ -168,6 +172,8 @@
 				50A9E19E21CAA1EB009EC154 /* LaunchScreen.storyboard */,
 				50A9E1A121CAA1EB009EC154 /* Info.plist */,
 				60B169D6A239307BEC142BCD /* AlamofireSync.swift */,
+				60B16DD10F50EB0792EF8584 /* EasyGesture.swift */,
+				60B160375C3C56F0DA00E6B3 /* Loged.swift */,
 			);
 			path = Fun;
 			sourceTree = "<group>";
@@ -320,9 +326,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFCFE0A92301A8C8009AAE8A /* Main.storyboard in Resources */,
 				50A9E1A021CAA1EB009EC154 /* LaunchScreen.storyboard in Resources */,
 				50A9E19D21CAA1EB009EC154 /* Assets.xcassets in Resources */,
-				50A9E19B21CAA1E8009EC154 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +454,8 @@
 				5027281821CE7B63009CE1D0 /* ShowApi.swift in Sources */,
 				EF32FA5D22FD95EA00CA3956 /* VideoViewController.swift in Sources */,
 				60B168C685B8BDCA7D4488C7 /* AlamofireSync.swift in Sources */,
+				60B1677B07C1ED343362145B /* EasyGesture.swift in Sources */,
+				60B16A26D92937E5CD7C4827 /* Loged.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,7 +632,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HRKB86ZA48;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Fun/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -643,7 +651,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HRKB86ZA48;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Fun/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
