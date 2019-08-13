@@ -24,12 +24,14 @@ class DatabaseWork {
         })
     }
 
+    @discardableResult
     func insert(_ name: String, _ link: String) -> Int64 {
         let insert = shows.insert(showName <- name, showLink <- link)
         let rowid = try! db.run(insert)
         return rowid
     }
 
+    @discardableResult
     func delete(_ link: String) -> Int {
         let show = shows.filter(showLink == link)
         return try! db.run(show.delete())
@@ -75,9 +77,10 @@ class DatabaseWork {
 
 }
 
-class ShowInfo {
+class ShowInfo: Codable {
     var name: String? = ""
     var link: String? = ""
+    var showNum: Int = 0
 
     init(name: String?, link: String?) {
         self.name = name

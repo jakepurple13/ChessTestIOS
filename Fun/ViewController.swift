@@ -16,6 +16,9 @@ import UserNotifications
 import AudioToolbox
 import Alamofire
 import SwiftyJSON
+import Casty
+import FileBrowser
+
 class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     
     @IBOutlet weak var button: UIButton!
@@ -28,6 +31,9 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var dubbedButton: UIButton!
     @IBOutlet weak var favoritesButton: UIButton!
     
+    @IBOutlet weak var importFavButton: UIButton!
+    @IBOutlet weak var exportFavButton: UIButton!
+    
     var lists = [NameAndLink]()
     
     override func viewDidLoad() {
@@ -36,6 +42,12 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         NSLog("Hello world");
         print("Hello world");
+
+        Casty.shared.initialize()
+        let button = Casty.castButton
+        button.tintColor = .blue
+        let barButton = UIBarButtonItem(customView: button)
+        navigationItem.rightBarButtonItem = barButton
         
         let center = UNUserNotificationCenter.current()
         let options: UNAuthorizationOptions = [.alert, .sound];
@@ -50,7 +62,12 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
                 // Notifications not allowed
             }
         }
-        
+        navigationItem.title = "\(DatabaseWork().getAllShows().count) Favorites"
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = "\(DatabaseWork().getAllShows().count) Favorites"
     }
 
     func convertToDictionary(text: String) -> [String: Any]? {
@@ -81,6 +98,61 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
                 }
             }
         }*/
+    }
+    
+    @IBAction func importAction(_ sender: Any) {
+        //let s = "[{\"link\":\"http://www.animetoon.org/watch-cowboy-bebop\",\"name\":\"Cowboy Bebop\",\"showNum\":0},{\"link\":\"http://www.animetoon.org/watch-the-pink-panther\",\"name\":\"The Pink Panther\",\"showNum\":124}]"
+
+        let fileBrowser = FileBrowser()
+
+        self.present(fileBrowser, animated: true)
+
+        fileBrowser.didSelectFile = { (file: FBFile) -> Void in
+            do {
+                if let dataFromString = try String(contentsOf: file.filePath).data(using: .utf8, allowLossyConversion: false) {
+                    let json = try! JSON(data: dataFromString)
+                    let db = DatabaseWork()
+                    for (_, show) in json {
+                        track("\(show["name"]) with \(show["link"])")
+                        if(db.findShowByLink("\(show["link"])") == nil) {
+                            db.insert("\(show["name"])", "\(show["link"])")
+                        }
+                    }
+                }
+            } catch {
+
+            }
+        }
+
+        showToast(message: "Finished")
+        navigationItem.title = "\(DatabaseWork().getAllShows().count) Favorites"
+
+        /*let db = DatabaseWork()
+        if let dataFromString = s.data(using: .utf8, allowLossyConversion: false) {
+            let json = try! JSON(data: dataFromString)
+            for (_, show) in json {
+                track("\(show["name"]) with \(show["link"])")
+
+                //db.insert("\(show["name"])", "\(show["link"])")
+            }
+        }*/
+
+    }
+    
+    @IBAction func exportAction(_ sender: Any) {
+        let db = DatabaseWork()
+        let s = db.getAllShows()
+        let jsonEncoder = JSONEncoder()
+        let jsonData = try! jsonEncoder.encode(s)
+        let json = String(data: jsonData, encoding: String.Encoding.utf8)!
+        track("\(json)")
+
+        let fileUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                .appendingPathComponent("fun1.json") // Your json file name
+        try? jsonData.write(to: fileUrl)
+        showToast(message: "Finished")
+        //let json = JSON(s)
+        //track("\(json.rawString())")
     }
     
     @IBAction func dubbedSend(_ sender: Any) {

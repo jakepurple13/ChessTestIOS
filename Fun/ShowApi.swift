@@ -205,7 +205,7 @@ public class ShowApi: NSObject {
     }
 
     private func getMovieOrVideo(source: Source) -> [NameAndLink] {
-        if(source == Source.FAVORITES) {
+        if (source == Source.FAVORITES) {
             let db = DatabaseWork()
             let all = db.getAllShows()
             var list = [NameAndLink]()
@@ -295,6 +295,26 @@ public class EpisodeApi: NSObject {
     var imageUrl: String = ""
     var des: String = ""
     var episodeList: [EpisodeInfo] = [EpisodeInfo]()
+
+    static func getName(url: String) -> String {
+        do {
+            let html: String = getUrl(url: url) as String;
+            let doc: Document = try SwiftSoup.parse(html)
+
+            if (url.contains("putlocker")) {
+                return try doc.select("li.breadcrumb-item").last()!.text()
+            } else if (url.contains("gogoanime")) {
+                return try doc.select("div.anime-title").text()
+            } else {
+                return try doc.select("div.right_col h1").text()
+            }
+        } catch Exception.Error(_, let message) {
+            print(message)
+        } catch {
+            print("error")
+        }
+        return ""
+    }
 
     init(url: String) {
         super.init()
@@ -473,10 +493,14 @@ class EpisodeInfo {
 
     public func getVideo() -> String {
         if (link.contains("putlocker")) {
-            let d = getUrl2(url: link).regexed(pat: "<iframe[^>]+src=\"([^\"]+)\"[^>]*><\\/iframe>") { s in s }
+            let d = getUrl2(url: link).regexed(pat: "<iframe[^>]+src=\"([^\"]+)\"[^>]*><\\/iframe>") { s in
+                s
+            }
             let s = try! SwiftSoup.parse(d[0]).select("iframe").attr("src")
             let a = try! String(contentsOf: URL(string: s)!)
-            let a1 = a.regexed(pat: "<p[^>]+id=\"videolink\">([^>]*)<\\/p>") { s in s}
+            let a1 = a.regexed(pat: "<p[^>]+id=\"videolink\">([^>]*)<\\/p>") { s in
+                s
+            }
             let a2 = try! SwiftSoup.parse(a1[0]).select("p#videolink").text()
             return "https://verystream.com/gettoken/\(a2)?mime=true"
         } else if (link.contains("gogoanime")) {

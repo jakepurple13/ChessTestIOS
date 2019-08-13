@@ -9,7 +9,10 @@
 import UIKit
 import JGProgressHUD
 import SimpleCheckbox
+import AIFlatSwitch
 import SwipeTransition
+import PopupDialog
+import Kingfisher
 
 extension ShowTableViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
@@ -20,19 +23,13 @@ extension ShowTableViewController: UISearchResultsUpdating {
 
 class ShowTableViewCell: UITableViewCell {
     @IBOutlet weak var nameToShow: UILabel!
-    @IBOutlet weak var favorite: UISwitch!
+    @IBOutlet weak var favCheck: AIFlatSwitch!
 }
 
 class ShowTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
 
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var titleBar: UINavigationItem!
-
-    @IBOutlet weak var searchBar: UISearchBar!
-
-    @IBAction func goBack(_ segue: UIStoryboardSegue) {
-
-    }
 
     // MARK: - Table view data source
     var list = [NameAndLink]()
@@ -44,6 +41,8 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
     let db = DatabaseWork()
 
     @IBOutlet weak var tableView: UITableView!
+    
+    var searchBars: UISearchBar!
 
     func backAction() {
         //print("Back Button Clicked")
@@ -59,9 +58,14 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.black
         track("hello")
-
-        self.searchBar.showsCancelButton = false
-        self.searchBar.delegate = self
+        
+        self.searchBars = UISearchBar()
+        self.searchBars.placeholder = "Search Shows in \(self.source!.rawValue)"
+        self.searchBars.showsCancelButton = false
+        self.searchBars.delegate = self
+        self.searchBars.sizeToFit()
+        
+        titleBar.titleView = searchBars
 
         definesPresentationContext = true
         self.navigationController?.swipeBack?.isEnabled = false
@@ -78,7 +82,7 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
                 self.shows = ShowApi(source: self.source!)
                 self.list = (self.shows?.showList)!
                 //self.filteredShows = self.list
-                self.titleBar.title = self.source!.rawValue
+                //self.titleBar.title = self.source!.rawValue
                 if (!(self.source?.recent)!) {
                     self.list.sort {
                         $0.name.localizedCaseInsensitiveCompare($1.name) == ComparisonResult.orderedAscending
@@ -122,7 +126,7 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
         searchBar.showsCancelButton = false
         if let searchText = searchBar.text {
             filteredShows = searchText.isEmpty ? list : list.filter({ (dataString: NameAndLink) -> Bool in
-                return dataString.name.range(of: searchText, options: .caseInsensitive) != nil
+                dataString.name.range(of: searchText, options: .caseInsensitive) != nil
             })
             tableView.reloadData()
         }
@@ -178,9 +182,9 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
 
         //cell.accessoryType = f != nil ? UITableViewCell.AccessoryType.checkmark : UITableViewCell.AccessoryType.none
         
-        cell.favorite?.isOn = f != nil
-        cell.favorite?.tag = indexPath.row
-        cell.favorite?.addTarget(self, action: #selector(switchChanged), for: UIControl.Event.valueChanged)
+        //cell.favorite?.isOn = f != nil
+        //cell.favorite?.tag = indexPath.row
+        //cell.favorite?.addTarget(self, action: #selector(switchChanged), for: UIControl.Event.valueChanged)
 
         //cell.nameToShow?.text = show.name/
         //cell.checkFavorite?.isChecked = true
@@ -193,9 +197,90 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }*/
 
+        cell.addGesture(setup: { (easy: EasyLongPressGesture) in}, actions: { view, easy in
+            DispatchQueue.main.async {
+                let ep = EpisodeApi(url: show.url)
+                // Prepare the popup assets
+                let title = ep.name
+                let message = ep.des
+
+                //let image = UIImage(named: ep.imageUrl)
+
+                // Create the dialog
+                let popup = PopupDialog(title: title, message: message)//, image: image)
+
+                /*let size = CGSize(width: 200, height: 267)
+                let processImage = ResizingImageProcessor(referenceSize: size, mode: ContentMode.aspectFit)
+
+                KingfisherManager.shared.retrieveImage(with: URL(string: ep.imageUrl)!, options: [.processor(processImage)], progressBlock: nil, completionHandler: { image, error, cacheType, imageURL in
+                    let vc = popup.viewController as! PopupDialogDefaultViewController
+                    vc.image = image
+                })*/
+
+                // This button will not the dismiss the dialog
+                let buttonTwo = DefaultButton(title: "OK", dismissOnTap: true) {
+                    print("What a beauty!")
+                }
+
+                // Add buttons to dialog
+                // Alternatively, you can use popup.addButton(buttonOne)
+                // to add a single button
+                popup.addButtons([buttonTwo])
+
+                // Present dialog
+                self.present(popup, animated: true, completion: nil)
+            }
+        })
+        
+        cell.favCheck?.isSelected = f != nil
+        if(cell.favCheck?.isSelected ?? false) {
+            cell.favCheck?.strokeColor = .green
+            cell.favCheck?.trailStrokeColor = .green
+        } else {
+            cell.favCheck?.strokeColor = .white
+            cell.favCheck?.trailStrokeColor = .white
+        }
+        cell.favCheck?.tag = indexPath.row
+
         return cell
     }
 
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage? {
+
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return newImage
+    }
+    
+    @IBAction func switched(_ sender: Any) {
+        if let flatSwitch = sender as? AIFlatSwitch {
+            let show = filteredShows[flatSwitch.tag]
+            if(flatSwitch.isSelected) {
+                self.db.insert(EpisodeApi.getName(url: show.url), show.url)
+                flatSwitch.strokeColor = .green
+                flatSwitch.trailStrokeColor = .green
+                flatSwitch.selectionAnimationDidStop = { _ in
+                    flatSwitch.strokeColor = .green
+                    flatSwitch.trailStrokeColor = .green
+                }
+            } else {
+                self.db.delete(show.url)
+                flatSwitch.strokeColor = .red
+                flatSwitch.trailStrokeColor = .red
+                flatSwitch.selectionAnimationDidStop = { _ in
+                    flatSwitch.strokeColor = .white
+                    flatSwitch.trailStrokeColor = .white
+                }
+            }
+        }
+    }
+    
     @objc func switchChanged(mySwitch: UISwitch) {
         let value = mySwitch.isOn
         let show = filteredShows[mySwitch.tag]
@@ -205,8 +290,6 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
         } else {
             self.db.delete(show.url)
         }
-        let s = self.db.getAll()
-        track("\(s)")
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

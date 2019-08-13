@@ -30,6 +30,8 @@ target 'Fun' do
   pod 'Casty'
   pod 'SQLite.swift', '~> 0.12.0'
   pod 'AIFlatSwitch'
+  pod 'PopupDialog', '~> 1.1'
+  pod 'FileBrowser', '~> 1.0'
   
   target 'FunTests' do
     inherit! :search_paths
