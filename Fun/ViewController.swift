@@ -113,8 +113,8 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
                     let json = try! JSON(data: dataFromString)
                     let db = DatabaseWork()
                     for (_, show) in json {
-                        track("\(show["name"]) with \(show["link"])")
-                        if(db.findShowByLink("\(show["link"])") == nil) {
+                        //track("\(show["name"]) with \(show["link"])")
+                        if(db.findShowByLink("\(show["link"])") == nil && db.findShowByName("\(show["name"])") == nil) {
                             db.insert("\(show["name"])", "\(show["link"])")
                         }
                     }
@@ -148,7 +148,7 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         track("\(json)")
 
         let fileUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                .appendingPathComponent("fun1.json") // Your json file name
+                .appendingPathComponent("fun_\(s.count).json") // Your json file name
         try? jsonData.write(to: fileUrl)
         showToast(message: "Finished")
         //let json = JSON(s)
