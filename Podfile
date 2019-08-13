@@ -28,6 +28,8 @@ target 'Fun' do
   pod "SwipeTransitionAutoSwipeToDismiss" # if needed
   pod 'google-cast-sdk'
   pod 'Casty'
+  pod 'SQLite.swift', '~> 0.12.0'
+  pod 'AIFlatSwitch'
   
   target 'FunTests' do
     inherit! :search_paths

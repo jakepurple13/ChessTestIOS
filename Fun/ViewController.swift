@@ -26,6 +26,7 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var AnimeMovieButton: UIButton!
     @IBOutlet weak var liveActionButton: UIButton!
     @IBOutlet weak var dubbedButton: UIButton!
+    @IBOutlet weak var favoritesButton: UIButton!
     
     var lists = [NameAndLink]()
     
@@ -106,6 +107,9 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     }
     @IBAction func liveActionSend(_ sender: Any) {
         loadInfo(sourced: Source.LIVE_ACTION)
+    }
+    @IBAction func favoriteSend(_ sender: Any) {
+        loadInfo(sourced: Source.FAVORITES)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

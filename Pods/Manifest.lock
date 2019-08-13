@@ -1,4 +1,5 @@
 PODS:
+  - AIFlatSwitch (1.0.7)
   - Alamofire (5.0.0-beta.7)
   - ASPVideoPlayer (6.0.0)
   - Casty (0.3.2):
@@ -17,6 +18,9 @@ PODS:
   - Protobuf (3.9.0)
   - SDDownloadManager (1.1.0)
   - SimpleCheckbox (1.5.0)
+  - SQLite.swift (0.12.2):
+    - SQLite.swift/standard (= 0.12.2)
+  - SQLite.swift/standard (0.12.2)
   - SwiftSoup (2.2.0)
   - SwiftyJSON (5.0.0)
   - SwipeTransition (0.4.0)
@@ -27,6 +31,7 @@ PODS:
   - VersaPlayer (3.0.0)
 
 DEPENDENCIES:
+  - AIFlatSwitch
   - Alamofire (~> 5.0.0-beta.5)
   - ASPVideoPlayer
   - Casty
@@ -39,6 +44,7 @@ DEPENDENCIES:
   - Player (~> 0.12.0)
   - SDDownloadManager
   - SimpleCheckbox
+  - SQLite.swift (~> 0.12.0)
   - SwiftSoup
   - SwiftyJSON (~> 5.0.0)
   - SwipeTransition
@@ -48,6 +54,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AIFlatSwitch
     - Alamofire
     - ASPVideoPlayer
     - Casty
@@ -61,6 +68,7 @@ SPEC REPOS:
     - Protobuf
     - SDDownloadManager
     - SimpleCheckbox
+    - SQLite.swift
     - SwiftSoup
     - SwiftyJSON
     - SwipeTransition
@@ -69,6 +77,7 @@ SPEC REPOS:
     - VersaPlayer
 
 SPEC CHECKSUMS:
+  AIFlatSwitch: fd56a5e6ab8769f0b52cef815c4f071e83050352
   Alamofire: bd07938ceecad59d2492aeecb1f785a8f2721160
   ASPVideoPlayer: fb3d49a1deb819c5fa093668c81fe9870750a766
   Casty: 028ba55a678bde18ca31da7c8a248beb51bdae24
@@ -82,6 +91,7 @@ SPEC CHECKSUMS:
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
   SDDownloadManager: 62a9339c03ea27606effefd9aa1800e4127e3a52
   SimpleCheckbox: 1e59697852ef3caa56a0ed1b40be0f034763b9b9
+  SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   SwiftSoup: 230991361c5ba249d140161860a3864a28b63860
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   SwipeTransition: 6c6a03e3706ba9c24221c5995671b460f27753b7
@@ -89,6 +99,6 @@ SPEC CHECKSUMS:
   SwipeTransitionAutoSwipeToDismiss: 00865eb5b2172f7fe244fb7d8fd818bbed9ff93c
   VersaPlayer: 2c3592173e4faafbdc13b1666d96911a42901911
 
-PODFILE CHECKSUM: 0dcfa3ebd169a373290bf9c8276a9b0504557f9c
+PODFILE CHECKSUM: ffeef97271939e280c1d07ee73c5097da8d4d403
 
 COCOAPODS: 1.7.0

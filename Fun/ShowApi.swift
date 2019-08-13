@@ -67,7 +67,7 @@ func getUrl(url: String) -> String {
 }
 
 public enum Source {
-    case RECENT_ANIME, RECENT_CARTOON, ANIME, CARTOON, DUBBED, ANIME_MOVIES, CARTOON_MOVIES, LIVE_ACTION
+    case RECENT_ANIME, RECENT_CARTOON, ANIME, CARTOON, DUBBED, ANIME_MOVIES, CARTOON_MOVIES, LIVE_ACTION, FAVORITES
 
     var url: String {
         switch self {
@@ -87,6 +87,8 @@ public enum Source {
             return "http://www.animetoon.org/movies"
         case .LIVE_ACTION:
             return "https://www.putlocker.fyi/a-z-shows/"
+        case .FAVORITES:
+            return "Favorite"
         }
     }
     var recent: Bool {
@@ -127,6 +129,8 @@ public enum Source {
             return "Cartoon Movies"
         case .LIVE_ACTION:
             return "Live Action"
+        case .FAVORITES:
+            return "Favorites"
         }
     }
 
@@ -201,7 +205,15 @@ public class ShowApi: NSObject {
     }
 
     private func getMovieOrVideo(source: Source) -> [NameAndLink] {
-        if (source.movie && source == Source.ANIME_MOVIES) {
+        if(source == Source.FAVORITES) {
+            let db = DatabaseWork()
+            let all = db.getAllShows()
+            var list = [NameAndLink]()
+            for s in all {
+                list.append(NameAndLink(name: s.name!, url: s.link!))
+            }
+            return list
+        } else if (source.movie && source == Source.ANIME_MOVIES) {
             let list = getVideoList(url: source.url)
             let filtered = list.filter {
                 $0.name.range(of: "movie", options: .caseInsensitive) != nil

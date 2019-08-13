@@ -82,6 +82,14 @@
                                     <action selector="dubbedSend:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cxx-kl-RKq"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10f-rJ-LQg">
+                                <rect key="frame" x="135" y="527" width="104" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Show Favorites"/>
+                                <connections>
+                                    <action selector="favoriteSend:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z0C-lb-uig"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -95,6 +103,7 @@
                         <outlet property="RecentCartoonButton" destination="MtM-pj-zOt" id="F1S-uw-z4s"/>
                         <outlet property="button" destination="isx-uz-G5R" id="6cX-de-3aJ"/>
                         <outlet property="dubbedButton" destination="8XR-fk-Pbt" id="I3r-CC-9cs"/>
+                        <outlet property="favoritesButton" destination="10f-rJ-LQg" id="CSA-Kl-BWq"/>
                         <outlet property="liveActionButton" destination="JSo-rM-mOx" id="BqE-DI-dcH"/>
                     </connections>
                 </viewController>
@@ -152,39 +161,42 @@
                                         </connections>
                                     </searchBar>
                                     <prototypes>
-                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ShowViewCell" rowHeight="81" id="ewG-y1-B6b" customClass="ShowTableViewCell" customModule="Fun" customModuleProvider="target">
+                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShowTableViewCell" rowHeight="81" id="ewG-y1-B6b" customClass="ShowTableViewCell" customModule="Fun" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="111.5" width="375" height="81"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ewG-y1-B6b" id="ooO-0g-Kir">
-                                                <rect key="frame" x="0.0" y="0.0" width="336" height="80.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="80.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Leo-Qc-hqY">
-                                                        <rect key="frame" x="55" y="34.5" width="42" height="11.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Leo-Qc-hqY">
+                                                        <rect key="frame" x="72" y="10" width="289" height="59"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="256" id="l6I-du-g4s"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fZJ-m6-IZ3" customClass="Checkbox" customModule="SimpleCheckbox">
-                                                        <rect key="frame" x="0.0" y="0.0" width="47" height="90"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </view>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uvw-pr-Dd2">
+                                                        <rect key="frame" x="15" y="25" width="51" height="31"/>
+                                                    </switch>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Leo-Qc-hqY" secondAttribute="trailing" constant="20" symbolic="YES" id="301-yf-LmK"/>
-                                                    <constraint firstItem="Leo-Qc-hqY" firstAttribute="leading" secondItem="ooO-0g-Kir" secondAttribute="leading" constant="55" id="Ofr-fH-b1u"/>
-                                                    <constraint firstItem="Leo-Qc-hqY" firstAttribute="centerY" secondItem="ooO-0g-Kir" secondAttribute="centerY" id="jN7-BI-lz9"/>
-                                                    <constraint firstAttribute="bottomMargin" secondItem="Leo-Qc-hqY" secondAttribute="bottom" constant="24" id="nhH-NH-dUa"/>
+                                                    <constraint firstItem="Leo-Qc-hqY" firstAttribute="top" secondItem="ooO-0g-Kir" secondAttribute="topMargin" constant="-1" id="6jx-1d-FpA"/>
+                                                    <constraint firstItem="Leo-Qc-hqY" firstAttribute="trailing" secondItem="ooO-0g-Kir" secondAttribute="trailingMargin" constant="1" id="DqR-u9-joc"/>
+                                                    <constraint firstItem="Leo-Qc-hqY" firstAttribute="bottom" secondItem="ooO-0g-Kir" secondAttribute="bottomMargin" constant="-1" id="KJp-CL-ALq"/>
+                                                    <constraint firstItem="Uvw-pr-Dd2" firstAttribute="top" secondItem="ooO-0g-Kir" secondAttribute="topMargin" constant="14" id="SYG-6H-a0J"/>
+                                                    <constraint firstItem="Leo-Qc-hqY" firstAttribute="centerY" secondItem="Uvw-pr-Dd2" secondAttribute="centerY" constant="-1" id="i6j-au-C2V"/>
+                                                    <constraint firstItem="Uvw-pr-Dd2" firstAttribute="leading" secondItem="ooO-0g-Kir" secondAttribute="leadingMargin" id="r3q-qi-ouk"/>
+                                                    <constraint firstItem="Leo-Qc-hqY" firstAttribute="leading" secondItem="Uvw-pr-Dd2" secondAttribute="trailing" constant="8" id="snD-e5-crn"/>
                                                 </constraints>
                                             </tableViewCellContentView>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <accessibility key="accessibilityConfiguration" identifier="ShowViewCell"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="ShowTableViewCell"/>
                                             <connections>
-                                                <outlet property="checkFavorite" destination="fZJ-m6-IZ3" id="zFc-Tv-NYb"/>
+                                                <outlet property="favorite" destination="Uvw-pr-Dd2" id="p3H-jF-mCq"/>
                                                 <outlet property="nameToShow" destination="Leo-Qc-hqY" id="H5A-pQ-UCW"/>
-                                                <outlet property="showName" destination="Leo-Qc-hqY" id="L6Q-HA-Iuv"/>
                                             </connections>
                                         </tableViewCell>
                                     </prototypes>

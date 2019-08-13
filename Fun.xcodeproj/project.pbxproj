@@ -24,6 +24,7 @@
 		50D1CF9721CEA71C002ED91D /* EpisodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D1CF9621CEA71C002ED91D /* EpisodeViewController.swift */; };
 		5DA4BD309E889C03C7B823F1 /* Pods_FunTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C22AD39635C818AEE0EFF7 /* Pods_FunTests.framework */; };
 		60B1677B07C1ED343362145B /* EasyGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B16DD10F50EB0792EF8584 /* EasyGesture.swift */; };
+		60B167B4E63564E0199F76F0 /* DatabaseWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B163036D822ADDAD452178 /* DatabaseWork.swift */; };
 		60B168C685B8BDCA7D4488C7 /* AlamofireSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B169D6A239307BEC142BCD /* AlamofireSync.swift */; };
 		60B16A26D92937E5CD7C4827 /* Loged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B160375C3C56F0DA00E6B3 /* Loged.swift */; };
 		7F30D19BA4D53C1F0059851F /* Pods_FunUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D4123CE997589EABAB40480 /* Pods_FunUITests.framework */; };
@@ -78,6 +79,7 @@
 		50A9E1C321CAB156009EC154 /* VideoJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoJson.swift; sourceTree = "<group>"; };
 		50D1CF9621CEA71C002ED91D /* EpisodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewController.swift; sourceTree = "<group>"; };
 		60B160375C3C56F0DA00E6B3 /* Loged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loged.swift; sourceTree = "<group>"; };
+		60B163036D822ADDAD452178 /* DatabaseWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseWork.swift; sourceTree = "<group>"; };
 		60B169D6A239307BEC142BCD /* AlamofireSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireSync.swift; sourceTree = "<group>"; };
 		60B16DD10F50EB0792EF8584 /* EasyGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyGesture.swift; sourceTree = "<group>"; };
 		717F930C67424DE19E08D95A /* Pods-FunTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FunTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FunTests/Pods-FunTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				60B169D6A239307BEC142BCD /* AlamofireSync.swift */,
 				60B16DD10F50EB0792EF8584 /* EasyGesture.swift */,
 				60B160375C3C56F0DA00E6B3 /* Loged.swift */,
+				60B163036D822ADDAD452178 /* DatabaseWork.swift */,
 			);
 			path = Fun;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				60B168C685B8BDCA7D4488C7 /* AlamofireSync.swift in Sources */,
 				60B1677B07C1ED343362145B /* EasyGesture.swift in Sources */,
 				60B16A26D92937E5CD7C4827 /* Loged.swift in Sources */,
+				60B167B4E63564E0199F76F0 /* DatabaseWork.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
