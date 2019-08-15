@@ -83,6 +83,7 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     
     @IBAction func cartoonMovieSend(_ sender: Any) {
         loadInfo(sourced: Source.CARTOON_MOVIES)
+
         /*DispatchQueue.main.async {
             DispatchQueue.main.async {
                 AF.request("https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=36357901&apikey=67053f507ef88fc99c544f4d7052dfa8", method: .get, encoding: JSONEncoding.default).responseJSON { response in
@@ -92,6 +93,23 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
                         let json = JSON(value)
                         //print("JSON: \(json)")
                         track("\(json["message"]["body"]["lyrics"]["lyrics_body"])")
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            }
+        }*/
+
+        /*DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                let aName = "Ninja+Sex+Party"
+                AF.request("https://api.musixmatch.com/ws/1.1/track.search?q_artist=\(aName)&page_size=100&page=1&f_has_lyrics=1&apikey=67053f507ef88fc99c544f4d7052dfa8", method: .get, encoding: JSONEncoding.default).responseJSON { response in
+                    //debugPrint(response)
+                    switch response.result {
+                    case .success(let value):
+                        let json = JSON(value)
+                        //print("JSON: \(json)")
+                        track("\(json["message"]["body"])")
                     case .failure(let error):
                         print(error)
                     }
