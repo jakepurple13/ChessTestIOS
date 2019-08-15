@@ -41,7 +41,7 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
     let db = DatabaseWork()
 
     @IBOutlet weak var tableView: UITableView!
-    
+
     var searchBars: UISearchBar!
 
     func backAction() {
@@ -58,13 +58,13 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.black
         track("hello")
-        
+
         self.searchBars = UISearchBar()
         self.searchBars.placeholder = "Search Shows in \(self.source!.rawValue)"
         self.searchBars.showsCancelButton = false
         self.searchBars.delegate = self
         self.searchBars.sizeToFit()
-        
+
         titleBar.titleView = searchBars
 
         definesPresentationContext = true
@@ -181,7 +181,7 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
         cell.backgroundColor = UIColor.black
 
         //cell.accessoryType = f != nil ? UITableViewCell.AccessoryType.checkmark : UITableViewCell.AccessoryType.none
-        
+
         //cell.favorite?.isOn = f != nil
         //cell.favorite?.tag = indexPath.row
         //cell.favorite?.addTarget(self, action: #selector(switchChanged), for: UIControl.Event.valueChanged)
@@ -197,7 +197,7 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }*/
 
-        cell.addGesture(setup: { (easy: EasyLongPressGesture) in}, actions: { view, easy in
+        cell.addGesture(setup: { (easy: EasyLongPressGesture) in }, actions: { view, easy in
             DispatchQueue.main.async {
                 let ep = EpisodeApi(url: show.url)
                 // Prepare the popup assets
@@ -231,9 +231,9 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
                 self.present(popup, animated: true, completion: nil)
             }
         })
-        
+
         cell.favCheck?.isSelected = f != nil
-        if(cell.favCheck?.isSelected ?? false) {
+        if (cell.favCheck?.isSelected ?? false) {
             cell.favCheck?.strokeColor = .green
             cell.favCheck?.trailStrokeColor = .green
         } else {
@@ -242,6 +242,33 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
         }
         cell.favCheck?.tag = indexPath.row
 
+        cell.favCheck?.selectionAnimationDidStart = { b in
+            if (b) {
+                cell.favCheck?.strokeColor = .green
+                cell.favCheck?.trailStrokeColor = .green
+            } else {
+                cell.favCheck?.strokeColor = .red
+                cell.favCheck?.trailStrokeColor = .red
+            }
+        }
+
+        cell.favCheck.selectionAnimationDidStop = { b in
+            if (b) {
+                var named = ""
+                if(self.source?.recent ?? false) {
+                    named = EpisodeApi.getName(url: show.url)
+                } else {
+                    named = show.name
+                }
+                self.db.insert(named, show.url)
+                cell.favCheck?.strokeColor = .green
+                cell.favCheck?.trailStrokeColor = .green
+            } else {
+                self.db.delete(show.url)
+                cell.favCheck?.strokeColor = .white
+                cell.favCheck?.trailStrokeColor = .white
+            }
+        }
         return cell
     }
 
@@ -257,11 +284,11 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
 
         return newImage
     }
-    
+
     @IBAction func switched(_ sender: Any) {
-        if let flatSwitch = sender as? AIFlatSwitch {
+        /*if let flatSwitch = sender as? AIFlatSwitch {
             let show = filteredShows[flatSwitch.tag]
-            if(flatSwitch.isSelected) {
+            if (flatSwitch.isSelected) {
                 self.db.insert(EpisodeApi.getName(url: show.url), show.url)
                 flatSwitch.strokeColor = .green
                 flatSwitch.trailStrokeColor = .green
@@ -278,14 +305,14 @@ class ShowTableViewController: UIViewController, UITableViewDataSource, UITableV
                     flatSwitch.trailStrokeColor = .white
                 }
             }
-        }
+        }*/
     }
-    
+
     @objc func switchChanged(mySwitch: UISwitch) {
         let value = mySwitch.isOn
         let show = filteredShows[mySwitch.tag]
         // Do something
-        if(value) {
+        if (value) {
             self.db.insert(show.name, show.url)
         } else {
             self.db.delete(show.url)

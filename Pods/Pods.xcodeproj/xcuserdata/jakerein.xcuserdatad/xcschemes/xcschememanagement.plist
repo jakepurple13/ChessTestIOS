@@ -4,159 +4,201 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>ASPVideoPlayer.xcscheme</key>
+		<key>AIFlatSwitch.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>Alamofire.xcscheme</key>
+		<key>ASPVideoPlayer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
-		<key>Digger.xcscheme</key>
+		<key>Alamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
-		<key>JGProgressHUD-JGProgressHUD.xcscheme</key>
+		<key>Casty.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
-		<key>JGProgressHUD.xcscheme</key>
+		<key>Digger.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
-		<key>Kanna.xcscheme</key>
+		<key>DynamicBlurView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>7</integer>
 		</dict>
-		<key>Kingfisher.xcscheme</key>
+		<key>FileBrowser.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
-		<key>MZDownloadManager.xcscheme</key>
+		<key>JGProgressHUD-JGProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>9</integer>
 		</dict>
-		<key>Player.xcscheme</key>
+		<key>JGProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>10</integer>
 		</dict>
-		<key>Pods-Fun.xcscheme</key>
+		<key>Kanna.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>11</integer>
 		</dict>
-		<key>Pods-FunTests.xcscheme</key>
+		<key>Kingfisher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>12</integer>
 		</dict>
-		<key>Pods-FunUITests.xcscheme</key>
+		<key>MZDownloadManager.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>13</integer>
 		</dict>
-		<key>Protobuf.xcscheme</key>
+		<key>Player.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>14</integer>
 		</dict>
-		<key>SDDownloadManager.xcscheme</key>
+		<key>Pods-Fun.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>
-		<key>SimpleCheckbox.xcscheme</key>
+		<key>Pods-FunTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>16</integer>
 		</dict>
-		<key>SwiftSoup.xcscheme</key>
+		<key>Pods-FunUITests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>17</integer>
 		</dict>
-		<key>SwiftyJSON.xcscheme</key>
+		<key>PopupDialog.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>18</integer>
 		</dict>
-		<key>SwipeTransition.xcscheme</key>
+		<key>Protobuf.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>19</integer>
 		</dict>
-		<key>SwipeTransitionAutoSwipeBack.xcscheme</key>
+		<key>SDDownloadManager.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>20</integer>
 		</dict>
-		<key>SwipeTransitionAutoSwipeToDismiss.xcscheme</key>
+		<key>SQLite.swift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>21</integer>
 		</dict>
-		<key>VersaPlayer.xcscheme</key>
+		<key>SimpleCheckbox.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>22</integer>
 		</dict>
-		<key>google-cast-sdk.xcscheme</key>
+		<key>SwiftSoup.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>23</integer>
+		</dict>
+		<key>SwiftyJSON.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>24</integer>
+		</dict>
+		<key>SwipeTransition.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>25</integer>
+		</dict>
+		<key>SwipeTransitionAutoSwipeBack.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>26</integer>
+		</dict>
+		<key>SwipeTransitionAutoSwipeToDismiss.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>27</integer>
+		</dict>
+		<key>VersaPlayer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>28</integer>
+		</dict>
+		<key>google-cast-sdk.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>29</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>

@@ -7,10 +7,10 @@ PODS:
   - Digger (0.0.5)
   - DynamicBlurView (3.0.1)
   - FileBrowser (1.0.0)
-  - google-cast-sdk (4.4.3):
-    - google-cast-sdk/Core (= 4.4.3)
+  - google-cast-sdk (4.4.4):
+    - google-cast-sdk/Core (= 4.4.4)
     - Protobuf (~> 3.0)
-  - google-cast-sdk/Core (4.4.3):
+  - google-cast-sdk/Core (4.4.4):
     - Protobuf (~> 3.0)
   - JGProgressHUD (2.0.4)
   - Kanna (4.0.3)
@@ -93,7 +93,7 @@ SPEC CHECKSUMS:
   Digger: c474bde76a91e0a36f12101c5dfe7e86774b15d3
   DynamicBlurView: b1df5415f9bd31897549e5d7077e5ec120a4d636
   FileBrowser: 2ca91ff61c9ea09665eb3b8f9e64a7a77e66a0bf
-  google-cast-sdk: fad0b26723a820bad54f550b2240810dc0fe53b9
+  google-cast-sdk: 776a7ecf2d630cf665d37fac7421b2bdb21fa414
   JGProgressHUD: 62658b14e72cccf179efc7a13bcb54d30b92fc22
   Kanna: 0ebbdd0e7e3308f0aafbd569e79c8cadc5eb877c
   Kingfisher: 176d377ad339113c99ad4980cbae687f807e20fe
@@ -113,4 +113,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 77f05cef6d2fdae28372603314404c4e126158df
 
-COCOAPODS: 1.7.0
+COCOAPODS: 1.7.5
