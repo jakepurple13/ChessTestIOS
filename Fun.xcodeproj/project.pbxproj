@@ -224,7 +224,7 @@
 				50A9E18F21CAA1E8009EC154 /* Frameworks */,
 				50A9E19021CAA1E8009EC154 /* Resources */,
 				1067E227735AE7EDFAC26FF4 /* [CP] Embed Pods Frameworks */,
-				4B4FF9F9DBB5951EE4F1343D /* [CP] Copy Pods Resources */,
+				148EE01D9580349DCAC385FE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -369,7 +369,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fun/Pods-Fun-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4B4FF9F9DBB5951EE4F1343D /* [CP] Copy Pods Resources */ = {
+		148EE01D9580349DCAC385FE /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

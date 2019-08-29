@@ -363,7 +363,7 @@ public class EpisodeApi: NSObject {
                 let episodes = try rowList.select("a.btn-episode")
                 for i in episodes.array() {
                     let vidLink = "https://www.putlocker.fyi/embed-src/\(try i.attr("data-pid"))"
-                    episodeList.append(EpisodeInfo(name: try i.text(), link: vidLink))
+                    episodeList.append(EpisodeInfo(name: try i.attr("title"), link: vidLink))
                 }
             } else if (url.contains("gogoanime")) {
 

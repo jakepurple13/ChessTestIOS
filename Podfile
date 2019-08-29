@@ -32,6 +32,7 @@ target 'Fun' do
   pod 'AIFlatSwitch'
   pod 'PopupDialog', '~> 1.1'
   pod 'FileBrowser', '~> 1.0'
+  pod 'HTMLKit'
   
   target 'FunTests' do
     inherit! :search_paths
