@@ -33,7 +33,12 @@ target 'Fun' do
   pod 'PopupDialog', '~> 1.1'
   pod 'FileBrowser', '~> 1.0'
   pod 'HTMLKit'
-  
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
+  pod 'GoogleSignIn'
+
   target 'FunTests' do
     inherit! :search_paths
     # Pods for testing
